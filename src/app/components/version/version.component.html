@@ -1,0 +1,7 @@
+<ul *ngFor="let item of versions | async">
+  <li>
+    {{ item.attributes.primary }}.{{ item.attributes.secondary }}.{{
+      item.attributes.terciary
+    }}
+  </li>
+</ul>
