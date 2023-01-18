@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/enviroments/enviroment';
+import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize, take } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpStatusCodeEnum } from '../shared/http-status-code.enum';
