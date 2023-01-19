@@ -5,7 +5,7 @@ steps:
 
 #build
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'buil:dev']
+  args: ['run', 'build:dev']
 
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
