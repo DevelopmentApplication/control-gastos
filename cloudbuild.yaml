@@ -8,4 +8,4 @@ steps:
     args: ["run", "build:${_BUILD_ENV}"]
 
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ["controlgastos", "deploy"]
+    args: ["app", "deploy"]
