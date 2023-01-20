@@ -1,11 +1,11 @@
 steps:
-#install
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
+  #install
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["install"]
 
-#build
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'build:${_BUILD_ENV}']
+  #build
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "build:${_BUILD_ENV}"]
 
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy']
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["controlgastos", "deploy"]
