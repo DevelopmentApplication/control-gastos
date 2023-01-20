@@ -1,4 +1,5 @@
 runtime: python27
+service: control_gastos-app
 api_version: 1
 threadsafe: true
 handlers:
