@@ -1,7 +1,11 @@
-<ul *ngFor="let item of versions | async">
-  <li>
-    {{ item.attributes.primary }}.{{ item.attributes.secondary }}.{{
-      item.attributes.terciary
-    }}
-  </li>
-</ul>
+<ng-container *ngIf="loaded | async">
+  <p>Versión actual: {{ version }}</p>
+  <p>Historial de versiones</p>
+  <ul *ngFor="let item of versions">
+    <li>
+      {{ item.attributes.primaria }}.{{ item.attributes.secundaria }}.{{
+        item.attributes.terciaria
+      }}
+    </li>
+  </ul>
+</ng-container>

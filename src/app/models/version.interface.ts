@@ -1,7 +1,7 @@
 export interface Attributes {
-  primary: number;
-  secondary: number;
-  terciary: number;
+  primaria: number;
+  secundaria: number;
+  terciaria: number;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
