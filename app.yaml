@@ -1,4 +1,4 @@
-service: front
+service: frontcontrolgastos
 runtime: python27
 api_version: 1
 threadsafe: true
