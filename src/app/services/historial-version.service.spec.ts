@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VersionService } from './version.service';
+import { HistorialVersionService } from './historial-version.service';
 
 describe('VersionService', () => {
-  let service: VersionService;
+  let service: HistorialVersionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(VersionService);
+    service = TestBed.inject(HistorialVersionService);
   });
 
   it('should be created', () => {

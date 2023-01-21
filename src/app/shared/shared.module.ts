@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VersionService } from '@services/version.service';
-import { VersionComponent } from '../components/version/version.component';
+import { HistorialVersionService } from '@services/historial-version.service';
+import { HistorialVersionComponent } from '../components/historial-version/historial-version.component';
 
 @NgModule({
-  declarations: [VersionComponent],
+  declarations: [HistorialVersionComponent],
   imports: [CommonModule],
-  exports: [VersionComponent],
-  providers: [VersionService],
+  exports: [HistorialVersionComponent],
+  providers: [HistorialVersionService],
 })
 export class SharedModule {}

@@ -9,17 +9,17 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class VersionService {
+export class HistorialVersionService {
   constructor(private httpClient: HttpClient) {}
 
   /**
-   * Obtiene lista de versiones.
+   * Obtiene lista de historial de versiones.
    */
   getVersions() {
     return this.httpClient
       .get<any>(
         environment.RESTservices.baseUrl +
-          environment.RESTservices.version.getVersions +
+          environment.RESTservices.historialVersion.getHistorialVersiones +
           '?sort=createdAt:desc'
       )
       .pipe(
