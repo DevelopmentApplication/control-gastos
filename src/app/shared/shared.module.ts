@@ -24,6 +24,6 @@ export function createTranslateLoader(http: HttpClient) {
       isolate: false,
     }),
   ],
-  exports: [TranslateModule],
+  exports: [TranslateModule, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

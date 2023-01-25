@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize, take } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpStatusCodeEnum } from '../shared/http-status-code.enum';
+import { HttpStatusCodeEnum } from '../shared/generic.enum';
 import { map } from 'rxjs';
 
 @Injectable({

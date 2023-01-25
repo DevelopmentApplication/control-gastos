@@ -15,3 +15,12 @@ export enum HttpStatusCodeEnum {
   SERVICE_UNAVAILABLE = 503,
   GATEWAY_TIMEOUT = 504,
 }
+
+export enum validationType {
+  EMAIL_FAIL_VALIDATION = 'Invalid email',
+  PASS_FAIL_VALIDATION = 'Invalid password',
+}
+
+export enum errorType {
+  ACCOUNT_NOT_FOUND = 'ACCOUNT_NOT_FOUND',
+}
