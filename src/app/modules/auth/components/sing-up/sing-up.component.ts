@@ -40,25 +40,6 @@ export class SingUpComponent {
     });
   }
 
-  /*
-  get f(){
-    return this.signInFormGroup.controls;
-  }
-
-  getControl(control: string): AbstractControl {
-    return this.signInFormGroup.controls[control];
-  }
-
-  validateError(): Boolean {
-    this.validationtype = this.getControl('email').errors
-      ? validationType.EMAIL_FAIL_VALIDATION
-      : undefined;
-    this.validationtype = this.getControl('password').errors
-      ? validationType.PASS_FAIL_VALIDATION
-      : undefined;
-    return this.validationtype ? true : false;
-  }*/
-
   auth() {
     alert('hola');
   }

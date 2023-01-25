@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { HistorialVersionService } from '../../services/historial-version.service';
-import { Version } from '../../models/historial-version.interface';
 import packageInfo from '../../../../package.json';
+import { Version } from '@models/version-history.interface';
+import { VersionHistoryService } from '@services/version-history/version-history.service';
 
 @Component({
-  selector: 'app-historial-version',
-  templateUrl: './historial-version.component.html',
-  styleUrls: ['./historial-version.component.css'],
+  selector: 'app-version-history',
+  templateUrl: './version-history.component.html',
+  styleUrls: ['./version-history.component.css'],
 })
 export class HistorialVersionComponent {
   loaded: Promise<boolean> | undefined;
   version: string = packageInfo.version;
   versions: Version[] = [];
 
-  constructor(private historialVersionService: HistorialVersionService) {
-    this.historialVersionService.getVersions().subscribe({
+  constructor(private VersionHistoryService: VersionHistoryService) {
+    this.VersionHistoryService.getVersions().subscribe({
       next: (res) => {
         this.versions = res;
       },

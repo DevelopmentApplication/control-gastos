@@ -7,7 +7,7 @@ export const environment = {
     baseUrl:
       'https://backcontrolgastos-dot-control-gastos-dev.ew.r.appspot.com/',
     historialVersion: {
-      getHistorialVersiones: '/api/historial-versiones',
+      getHistorialVersiones: '/api/version-historyes',
     },
   },
 };

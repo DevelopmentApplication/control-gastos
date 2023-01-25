@@ -85,6 +85,15 @@
           <div class="mt-1">
             <input formControlName="repeatPassword" type="password" />
           </div>
+          <div>
+            <p class="text-red-700 mt-2 text-sm">
+              <span
+                class="fadeIn"
+                *ngIf="signInFormGroup.controls.repeatPassword.touched && signInFormGroup.controls.repeatPassword.errors?.['required']"
+                >Password is required</span
+              >
+            </p>
+          </div>
         </div>
         <div>
           <button

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistorialVersionComponent } from './historial-version.component';
+import { HistorialVersionComponent } from './version-history.component';
 
 describe('HistorialVersionComponent', () => {
   let component: HistorialVersionComponent;
@@ -8,9 +8,8 @@ describe('HistorialVersionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HistorialVersionComponent ]
-    })
-    .compileComponents();
+      declarations: [HistorialVersionComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HistorialVersionComponent);
     component = fixture.componentInstance;

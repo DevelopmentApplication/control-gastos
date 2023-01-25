@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize, take } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpStatusCodeEnum } from '../shared/generic.enum';
+import { HttpStatusCodeEnum } from '@shared/generic.enum';
 import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HistorialVersionService {
+export class VersionHistoryService {
   constructor(private httpClient: HttpClient) {}
 
   /**
