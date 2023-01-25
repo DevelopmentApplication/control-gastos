@@ -8,7 +8,7 @@ import { VersionHistoryService } from '@services/version-history/version-history
   templateUrl: './version-history.component.html',
   styleUrls: ['./version-history.component.css'],
 })
-export class HistorialVersionComponent {
+export class VersionHistoryComponent {
   loaded: Promise<boolean> | undefined;
   version: string = packageInfo.version;
   versions: Version[] = [];

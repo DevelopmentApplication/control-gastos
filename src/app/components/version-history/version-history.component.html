@@ -1,10 +1,10 @@
 <ng-container *ngIf="loaded | async">
-  <p>Versión actual: {{ version }}</p>
-  <p>Historial de versiones</p>
+  <p>Current Version: {{ version }}</p>
+  <p>Versions History</p>
   <ul *ngFor="let item of versions">
     <li>
-      {{ item.attributes.primaria }}.{{ item.attributes.secundaria }}.{{
-        item.attributes.terciaria
+      {{ item.attributes.primary }}.{{ item.attributes.secundary }}.{{
+        item.attributes.terciary
       }}
     </li>
   </ul>

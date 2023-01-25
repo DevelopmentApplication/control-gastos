@@ -13,7 +13,7 @@ export class VersionHistoryService {
   constructor(private httpClient: HttpClient) {}
 
   /**
-   * Obtiene lista de historial de versiones.
+   * get version list
    */
   getVersions() {
     return this.httpClient
