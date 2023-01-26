@@ -39,6 +39,18 @@
             "
             formControlName="email"
           ></app-input>
+          <p class="text-red-700 mt-2 text-xs">
+            <span
+              class="fadeIn"
+              *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['required']"
+              >Email is required</span
+            >
+            <span
+              class="fadeIn"
+              *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['email']"
+              >Invalid email</span
+            >
+          </p>
         </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700"
@@ -53,7 +65,7 @@
             formControlName="password"
           >
           </app-input>
-          <p class="text-red-700 mt-2 text-sm">
+          <p class="text-red-700 mt-2 text-xs">
             <span
               class="fadeIn"
               *ngIf="signInFormGroup.controls.password.touched && signInFormGroup.controls.password.errors?.['required']"
