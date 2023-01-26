@@ -4,13 +4,14 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from '../components/input/input.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [],
+  declarations: [InputComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,6 +25,6 @@ export function createTranslateLoader(http: HttpClient) {
       isolate: false,
     }),
   ],
-  exports: [TranslateModule, FormsModule, ReactiveFormsModule],
+  exports: [InputComponent, TranslateModule, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

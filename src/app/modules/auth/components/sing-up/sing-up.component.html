@@ -31,69 +31,35 @@
           <label for="email" class="block text-sm font-medium text-gray-700"
             >Email address</label
           >
-          <div class="mt-1">
-            <input
-              [ngClass]="{'error': signInFormGroup.controls.email.touched && (signInFormGroup.controls.email.errors?.['required'] || signInFormGroup.controls.email.errors?.['email'])}"
-              name="email"
-              formControlName="email"
-              type="email"
-              required
-            />
-          </div>
-          <div>
-            <p class="text-red-700 mt-2 text-sm">
-              <span
-                class="fadeIn"
-                *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['required']"
-                >Email is required</span
-              >
-              <span
-                class="fadeIn"
-                *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['email']"
-                >Invalid email</span
-              >
-            </p>
-          </div>
+          <app-input
+            [type]="'email'"
+            [isError]="
+              signInFormGroup.controls.email.touched &&
+              this.signInFormGroup.controls.email.invalid
+            "
+            formControlName="email"
+          ></app-input>
         </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700"
             >Password</label
           >
-          <div class="mt-1">
-            <input
-              [ngClass]="{'error': signInFormGroup.controls.password.touched && (signInFormGroup.controls.password.errors?.['required'])}"
-              formControlName="password"
-              type="password"
-            />
-          </div>
-          <div>
-            <p class="text-red-700 mt-2 text-sm">
-              <span
-                class="fadeIn"
-                *ngIf="signInFormGroup.controls.password.touched && signInFormGroup.controls.password.errors?.['required']"
-                >Password is required</span
-              >
-            </p>
-          </div>
-        </div>
-        <div>
-          <label
-            for="repeatPassword"
-            class="block text-sm font-medium text-gray-700"
-            >Repeat your Password</label
+          <app-input
+            [type]="'password'"
+            [isError]="
+              signInFormGroup.controls.password.touched &&
+              this.signInFormGroup.controls.password.invalid
+            "
+            formControlName="password"
           >
-          <div class="mt-1">
-            <input formControlName="repeatPassword" type="password" />
-          </div>
-          <div>
-            <p class="text-red-700 mt-2 text-sm">
-              <span
-                class="fadeIn"
-                *ngIf="signInFormGroup.controls.repeatPassword.touched && signInFormGroup.controls.repeatPassword.errors?.['required']"
-                >Password is required</span
-              >
-            </p>
-          </div>
+          </app-input>
+          <p class="text-red-700 mt-2 text-sm">
+            <span
+              class="fadeIn"
+              *ngIf="signInFormGroup.controls.password.touched && signInFormGroup.controls.password.errors?.['required']"
+              >Password is required</span
+            >
+          </p>
         </div>
         <div>
           <button

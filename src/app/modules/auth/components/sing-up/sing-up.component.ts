@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
 import { GenericError } from '@models/generic.error';
 import { errorType } from '@shared/generic.enum';
 import { fadeInOut } from '@shared/animation';
+import { AuthService } from '@services/auth/auth.service';
+import { RequestAuthRegistration } from '@models/auth/register.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sing-up',
@@ -16,23 +18,29 @@ import { fadeInOut } from '@shared/animation';
   styleUrls: ['./sing-up.component.css'],
   animations: [fadeInOut()],
 })
-export class SingUpComponent {
+export class SingUpComponent implements OnInit {
   signInFormGroup: FormGroup;
   validationtype: string | undefined;
   genericError: GenericError | undefined;
-  showEmailError: Boolean;
   messageValidationEmail: string;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm(): void {
     this.signInFormGroup = this.fb.group({
       email: new FormControl(null, {
         updateOn: 'blur',
-        validators: [(Validators.required, Validators.email)],
+        validators: [Validators.required, Validators.email],
       }),
       password: new FormControl(null, Validators.required),
-      repeatPassword: new FormControl('', Validators.required),
     });
 
     this.signInFormGroup.controls.email.valueChanges.subscribe((val) => {
@@ -41,6 +49,17 @@ export class SingUpComponent {
   }
 
   auth() {
-    alert('hola');
+    const requestAuthRegistration: RequestAuthRegistration = {
+      user: this.signInFormGroup.controls.email.value,
+      email: this.signInFormGroup.controls.email.value,
+      password: this.signInFormGroup.controls.password.value,
+    };
+    this.authService.postRegistation(requestAuthRegistration).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: () => {},
+      complete: () => this.router.navigate(['welcome']),
+    });
   }
 }

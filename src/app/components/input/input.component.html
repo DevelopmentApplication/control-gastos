@@ -1,0 +1,9 @@
+<input
+  class="mt-1"
+  [type]="type"
+  [ngClass]="{ error: isError }"
+  [value]="value"
+  (input)="onChange($event)"
+  (blur)="touched()"
+  [disabled]="disabled"
+/>
