@@ -10,8 +10,8 @@ export const environment = {
       auth: '/api/auth/local',
       register: '/api/auth/local/register',
     },
-    versionHistory: {
-      getVersionHistory: '/api/version-historyes',
+    historialVersion: {
+      getHistorialVersiones: '/api/version-histories',
     },
   },
 };

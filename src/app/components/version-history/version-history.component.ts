@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import packageInfo from '../../../../package.json';
-import { Version } from '@models/version-history.interface';
 import { VersionHistoryService } from '@services/version-history/version-history.service';
+import { IVersionHistory } from '@models/version-history/version-history.interface';
+import { GenericError } from '../../models/generic.error';
 
 @Component({
   selector: 'app-version-history',
@@ -10,16 +11,14 @@ import { VersionHistoryService } from '@services/version-history/version-history
 })
 export class VersionHistoryComponent {
   loaded: Promise<boolean> | undefined;
-  version: string = packageInfo.version;
-  versions: Version[] = [];
+  appVersion: string = packageInfo.version;
+  versions: IVersionHistory[]=[];
 
   constructor(private VersionHistoryService: VersionHistoryService) {
+
     this.VersionHistoryService.getVersions().subscribe({
       next: (res) => {
         this.versions = res;
-      },
-      error: (e) => {
-        console.log(e);
       },
       complete: () => (this.loaded = Promise.resolve(true)),
     });

@@ -21,7 +21,7 @@
       </p>
     </div>
     <div class="bg-white py-8 shadow rounded-lg sm:px-10 text-sm">
-      <generic-error-message [error]="genericError"></generic-error-message>
+      <app-generic-error-message [error]="genericError"></app-generic-error-message>
       <form
         [formGroup]="signInFormGroup"
         (ngSubmit)="auth()"

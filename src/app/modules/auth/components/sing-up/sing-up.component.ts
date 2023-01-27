@@ -20,7 +20,6 @@ import { Router } from '@angular/router';
 })
 export class SingUpComponent implements OnInit {
   signInFormGroup: FormGroup;
-  validationtype: string | undefined;
   genericError: GenericError | undefined;
   messageValidationEmail: string;
 

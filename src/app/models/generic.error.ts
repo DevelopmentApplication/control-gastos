@@ -1,6 +1,8 @@
 import { errorType } from '@shared/generic.enum';
 
 export class GenericError {
-  type: errorType;
+  status: number;
+  name: string;
   messagge: string;
+  details: Object;
 }

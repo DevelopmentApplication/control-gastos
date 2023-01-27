@@ -13,13 +13,15 @@ import { ErrorInterceptorService } from './providers/error.interceptor';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VersionHistoryService } from '@services/version-history/version-history.service';
+import { VersionHistoryComponent } from '@components/version-history/version-history.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,VersionHistoryComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,6 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
   ],
   providers: [
+    VersionHistoryService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
