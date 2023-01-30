@@ -8,10 +8,6 @@ module.exports = {
       lg: "976px",
       xl: "1440px",
     },
-    fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
-    },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };

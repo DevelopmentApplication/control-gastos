@@ -21,16 +21,16 @@ export class VersionHistoryService {
     return this.httpClient
       .get<IVersionHistoryResponse>(
         environment.RESTservices.baseUrl +
-          environment.RESTservices.historialVersion.getHistorialVersiones + "d"+
+          environment.RESTservices.historialVersion.getHistorialVersiones +
           '?sort=createdAt:desc'
       )
       .pipe(
-        map(res => res.data),
+        map((res) => res.data),
         catchError(this.handleGetError)
       );
   }
 
-  private handleGetError(err:HttpErrorResponse) {
+  private handleGetError(err: HttpErrorResponse) {
     return throwError(() => err.error);
   }
 }

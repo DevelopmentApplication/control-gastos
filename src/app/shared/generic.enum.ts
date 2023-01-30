@@ -60,6 +60,14 @@ export enum HttpStatusCodeEnum {
   NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
 
-export enum errorType {
+export enum TypeAlert {
+  DEFAULT = 'default',
+  WARNING = 'warning',
+  ERROR = 'error',
+  SUCCESS = 'success',
+  PRIMARY = 'primary',
+}
+
+export enum ErrorType {
   ACCOUNT_NOT_FOUND = 'ACCOUNT_NOT_FOUND',
 }

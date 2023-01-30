@@ -1,30 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputComponent } from '../components/input/input.component';
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { InputComponent } from '@components/input/input.component';
+import { AlertComponent } from '@components/alert/alert.component';
 
 @NgModule({
-  declarations: [InputComponent],
-  imports: [
-    CommonModule,
+  declarations: [InputComponent, AlertComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  exports: [
+    InputComponent,
+    TranslateModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-      isolate: false,
-    }),
+    AlertComponent,
   ],
-  exports: [InputComponent, TranslateModule, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}
