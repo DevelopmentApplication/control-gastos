@@ -6,7 +6,7 @@ handlers:
   - url: /
     static_files: dist/control_gastos/index.html
     upload: dist/control_gastos/index.html
-  - url: /
+  - url: /(.*)
     static_dir: dist/control_gastos
 skip_files:
   - e2e/
