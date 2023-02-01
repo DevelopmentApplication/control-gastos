@@ -1,9 +1,10 @@
+service: frontcontrolgastos
 runtime: python27
 api_version: 1
 threadsafe: true
 
 handlers:
-  - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
+  - url: /(.*\.(gif|png|jpg|css|js|json)(|\.map))$
     static_files: dist/\1
     upload: dist/(.*)(|\.map)
 
@@ -16,7 +17,6 @@ skip_files:
   - node_modules/
   - src/
   - ^(.*/)?\..*$
-  - ^(.*/)?.*\.json$
   - ^(.*/)?.*\.md$
   - ^(.*/)?.*\.yaml$
   - ^LICENSE
