@@ -4,7 +4,7 @@ api_version: 1
 threadsafe: true
 handlers:
   - url: /(.*\.(js|css|svg|png)(|\.map))$
-  static_files: dist/\1
+  static_files: dist
   upload: dist/(.*)(|\.map)
   - url: /.*
   static_files: dist/index.html
