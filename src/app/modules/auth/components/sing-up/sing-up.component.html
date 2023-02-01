@@ -19,24 +19,19 @@
       </p>
     </div>
     <div class="bg-white py-8 shadow rounded-lg sm:px-10 text-sm">
-      <form
-        [formGroup]="signInFormGroup"
-        (ngSubmit)="auth()"
-        class="mt-8 space-y-6"
-      >
+      <form [formGroup]="signInFormGroup" class="mt-8 space-y-6">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Email address</label
-          >
           <app-input
             [type]="'email'"
+            [isFloatlabel]="'Enter your email'"
             [isError]="
               signInFormGroup.controls.email.touched &&
               this.signInFormGroup.controls.email.invalid
             "
             formControlName="email"
           ></app-input>
-          <p class="text-red-700 mt-2 text-xs">
+
+          <p class="text-red-600 mt-2 text-xs">
             <span
               class="fadeIn"
               *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['required']"
@@ -55,6 +50,7 @@
           >
           <app-input
             [type]="'password'"
+            [isFloatlabel]="'Enter your password'"
             [isError]="
               signInFormGroup.controls.password.touched &&
               this.signInFormGroup.controls.password.invalid
@@ -71,27 +67,21 @@
           </p>
         </div>
         <div>
-          <button
-            type="submit"
-            [disabled]="false"
-            class="group relative flex items-center w-full h-12 justify-center align-middle rounded-lg border border-transparent bg-violet-700 py-2 px-4 text-sm font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 fill-violet-500 group-hover:text-violet-400"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </span>
-            Sign up
-          </button>
+          <app-button
+            [type]="'default'"
+            [text]="'default button'"
+            (callback)="auth()"
+          ></app-button>
+          <app-button
+            [type]="'primary'"
+            [text]="'SignUp'"
+            (callback)="auth()"
+          ></app-button>
+          <app-button
+            [type]="'action'"
+            [text]="'action button'"
+            (callback)="auth()"
+          ></app-button>
         </div>
       </form>
     </div>

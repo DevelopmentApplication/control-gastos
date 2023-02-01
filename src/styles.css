@@ -20,15 +20,11 @@
   [multiple],
   textarea,
   select {
-    @apply w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500;
+    @apply w-full px-3 pb-2.5 pt-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500;
   }
   .error {
     @apply border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500;
   }
-
-  /*
-  * button component
-  */
 
   /*
   * alert component
@@ -65,6 +61,30 @@
   }
   [role="alert"].success.isborder {
     @apply border border-green-400 dark:border-green-800;
+  }
+}
+
+@layer components {
+  /*
+  * button component
+  */
+  button {
+    @apply relative flex items-center justify-center align-middle 
+    w-full h-12 py-2 px-4 mb-2
+    text-sm font-medium
+    rounded-lg 
+    disabled:cursor-not-allowed 
+    disabled:opacity-50
+    shadow-lg;
+  }
+  button.default {
+    @apply border border-gray-300 focus:outline-none focus:ring-1 text-black focus:ring-gray-500 hover:bg-gray-50;
+  }
+  button.primary {
+    @apply focus:outline-none focus:ring-2 bg-violet-700 text-white focus:ring-violet-500 hover:bg-violet-600;
+  }
+  button.action {
+    @apply focus:outline-none focus:ring-2 bg-gray-700 text-white focus:ring-gray-500 hover:bg-gray-600;
   }
 }
 
