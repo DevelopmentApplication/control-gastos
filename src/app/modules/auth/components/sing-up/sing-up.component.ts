@@ -95,7 +95,7 @@ export class SingUpComponent implements OnInit {
     this.sharedService.openAlert(
       new Alert(
         true,
-        TypeAlert.PRIMARY,
+        TypeAlert.DEFAULT,
         'You have 1 unread message',
         true,
         'New message'

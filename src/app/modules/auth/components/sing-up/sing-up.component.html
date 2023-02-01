@@ -22,8 +22,9 @@
       <form [formGroup]="signInFormGroup" class="mt-8 space-y-6">
         <div>
           <app-input
+            [id]="'email'"
             [type]="'email'"
-            [isFloatlabel]="'Enter your email'"
+            [floatLabel]="'Enter your email'"
             [isError]="
               signInFormGroup.controls.email.touched &&
               this.signInFormGroup.controls.email.invalid
@@ -34,23 +35,16 @@
           <p class="text-red-600 mt-2 text-xs">
             <span
               class="fadeIn"
-              *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['required']"
-              >Email is required</span
-            >
-            <span
-              class="fadeIn"
               *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['email']"
               >Invalid email</span
             >
           </p>
         </div>
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700"
-            >Password</label
-          >
           <app-input
+            [id]="'password'"
             [type]="'password'"
-            [isFloatlabel]="'Enter your password'"
+            [floatLabel]="'Enter your password'"
             [isError]="
               signInFormGroup.controls.password.touched &&
               this.signInFormGroup.controls.password.invalid
@@ -58,28 +52,13 @@
             formControlName="password"
           >
           </app-input>
-          <p class="text-red-700 mt-2 text-xs">
-            <span
-              class="fadeIn"
-              *ngIf="signInFormGroup.controls.password.touched && signInFormGroup.controls.password.errors?.['required']"
-              >Password is required</span
-            >
-          </p>
         </div>
+
         <div>
           <app-button
-            [type]="'default'"
-            [text]="'default button'"
-            (callback)="auth()"
-          ></app-button>
-          <app-button
-            [type]="'primary'"
-            [text]="'SignUp'"
-            (callback)="auth()"
-          ></app-button>
-          <app-button
             [type]="'action'"
-            [text]="'action button'"
+            [text]="'SignUp'"
+            [icon]="true"
             (callback)="auth()"
           ></app-button>
         </div>

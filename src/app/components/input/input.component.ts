@@ -14,9 +14,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
+  @Input() id: string;
   @Input() type: string;
   @Input() isError: boolean;
-  @Input() isFloatlabel: string;
+  @Input() floatLabel: string;
   value: string;
   changed: (val: any) => {};
   touched: () => {};
