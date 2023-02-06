@@ -1,5 +1,9 @@
-<div class="flex min-h-full justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="w-full max-w-md space-y-8">
+<div
+  class="min-h-full flex justify-end bg-gradient-to-br from-violet-400 to-violet-700"
+>
+  <div
+    class="lg:max-w-2xl w-full h-auto bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-20 pb-6 space-y-6"
+  >
     <div>
       <img
         class="mx-auto h-12 w-auto"
@@ -18,24 +22,32 @@
         >
       </p>
     </div>
-    <div class="bg-white py-8 shadow rounded-lg sm:px-10 text-sm">
-      <form [formGroup]="signInFormGroup" class="mt-8 space-y-6">
+    <div>
+      <form [formGroup]="signInFormGroup" class="space-y-4">
+        <div class="flex flex-col">
+          <app-social-button
+            [type]="'lg full b-google-secondary'"
+            [text]="'Sign Up with Google'"
+            [social]="'google'"
+          ></app-social-button>
+        </div>
+        <p class="mt-2 text-center text-sm text-gray-500">or</p>
+        <hr />
         <div>
           <app-input
             [id]="'email'"
             [type]="'email'"
             [floatLabel]="'Enter your email'"
             [isError]="
-              signInFormGroup.controls.email.touched &&
+              !signInFormGroup.controls.email.pristine &&
               this.signInFormGroup.controls.email.invalid
             "
             formControlName="email"
           ></app-input>
-
-          <p class="text-red-600 mt-2 text-xs">
+          <p class="text-red-600 my-1 text-xs">
             <span
               class="fadeIn"
-              *ngIf="signInFormGroup.controls.email.touched && signInFormGroup.controls.email.errors?.['email']"
+              *ngIf="signInFormGroup.controls.email.errors?.['email']"
               >Invalid email</span
             >
           </p>
@@ -46,24 +58,27 @@
             [type]="'password'"
             [floatLabel]="'Enter your password'"
             [isError]="
-              signInFormGroup.controls.password.touched &&
+              !signInFormGroup.controls.password.pristine &&
               this.signInFormGroup.controls.password.invalid
             "
             formControlName="password"
           >
           </app-input>
         </div>
-
         <div>
           <app-button
-            [type]="'action'"
-            [text]="'SignUp'"
-            [icon]="true"
+            [type]="'lg full action'"
+            [text]="'Create account'"
+            [iconType]="'bi bi-box-arrow-in-right'"
+            [onLoad]="onLoad"
+            [disabled]="this.signInFormGroup.invalid && onLoad"
             (callback)="auth()"
           ></app-button>
         </div>
       </form>
     </div>
-    <app-alert></app-alert>
+    <div>
+      <app-alert></app-alert>
+    </div>
   </div>
 </div>

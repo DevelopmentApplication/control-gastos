@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
-  /*Apply custom class to input element*/
   [type="text"],
   [type="email"],
   [type="url"],
@@ -62,33 +61,8 @@
   [role="alert"].success.isborder {
     @apply border border-green-400 dark:border-green-800;
   }
-}
-
-@layer components {
   /*
-  * button component
-  */
-  button {
-    @apply relative flex items-center justify-center align-middle 
-    w-full h-12 py-2 px-4 mb-2
-    text-sm font-medium
-    rounded-lg 
-    disabled:cursor-not-allowed 
-    disabled:opacity-50
-    shadow-lg;
-  }
-  button.default {
-    @apply border border-gray-300 focus:outline-none focus:ring-1 text-black focus:ring-gray-500 hover:bg-gray-50;
-  }
-  button.primary {
-    @apply focus:outline-none focus:ring-2 bg-violet-700 text-white focus:ring-violet-500 hover:bg-violet-600;
-  }
-  button.action {
-    @apply focus:outline-none focus:ring-2 bg-gray-800 text-white focus:ring-gray-500 hover:bg-gray-700;
-  }
-
-  /*
-  * label float
+  * label
   */
   label.float {
     @apply absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-violet-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1;
@@ -97,6 +71,9 @@
   label.float.error {
     @apply text-red-600 peer-focus:text-red-600;
   }
+}
+
+@layer components {
 }
 
 @layer utilities {

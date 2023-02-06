@@ -1,0 +1,106 @@
+@tailwind components;
+@layer components {
+  button {
+    @apply relative flex items-center justify-center align-middle 
+    mb-2
+    font-medium
+    disabled:cursor-not-allowed 
+    disabled:opacity-95
+    shadow-lg;
+  }
+  button.sm {
+    @apply text-xs h-6 py-2 px-4 rounded-md;
+  }
+  button.md {
+    @apply text-sm h-9 py-2 px-4 rounded-md;
+  }
+  button.lg {
+    @apply text-base h-12 py-2 px-4 rounded-lg;
+  }
+  button.xl {
+    @apply text-lg h-14 py-2 px-4 rounded-lg;
+  }
+  button.full {
+    @apply w-full;
+  }
+  button.full .b-text {
+    @apply w-full;
+  }
+  button.full.sm .b-icon + .b-text {
+    margin-right: 0.875 rem;
+  }
+  button.full.md .b-icon + .b-text {
+    @apply mr-5;
+  }
+  button.full.lg .b-icon + .b-text {
+    @apply mr-6;
+  }
+  button.full.xl .b-icon + .b-text {
+    margin-right: 1.875 rem;
+  }
+  button.auto {
+    @apply w-auto;
+  }
+  button.auto .b-text {
+    @apply w-full;
+  }
+  button.auto.sm .b-icon + .b-text {
+    @apply mx-2;
+  }
+  button.auto.md .b-icon + .b-text {
+    @apply mx-3;
+  }
+  button.auto.lg .b-icon + .b-text {
+    @apply mx-3;
+  }
+  button.auto.xl .b-icon + .b-text {
+    @apply mx-4;
+  }
+  button .b-icon.bi {
+    @apply text-violet-500;
+  }
+  button.sm .b-icon {
+    @apply text-sm;
+  }
+  button.md .b-icon {
+    @apply text-xl;
+  }
+  button.lg .b-icon {
+    @apply text-2xl;
+  }
+  button.xl .b-icon {
+    @apply text-3xl;
+  }
+  button.sm svg {
+    width: 14px;
+    height: 14px;
+  }
+  button.md svg {
+    @apply w-5 h-5;
+  }
+  button.lg svg {
+    @apply w-6 h-6;
+  }
+  button.xl svg {
+    width: 30px;
+    height: 30px;
+  }
+  button.default {
+    @apply text-black border border-gray-200
+    focus:outline-none focus:ring-2 focus:enabled:ring-gray-300 
+  hover:enabled:bg-gray-200/90
+  active:enabled:bg-gray-200;
+  }
+  button.primary {
+    @apply bg-violet-800 text-white
+    focus:outline-none focus:ring-2  focus:enabled:ring-violet-400
+    hover:enabled:bg-violet-800/90
+    active:enabled:bg-violet-800;
+  }
+  button.action {
+    @apply bg-gray-800 text-white
+    focus:outline-none focus:ring-2 focus:enabled:ring-gray-400  
+    hover:enabled:bg-gray-800/90
+    active:enabled:bg-gray-800;
+  }
+}

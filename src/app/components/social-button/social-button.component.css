@@ -1,0 +1,34 @@
+@tailwind components;
+@import url("../button/button.component.css");
+@layer components {
+  /*button.b-google {
+    @apply text-white
+    bg-[#4285F4] 
+    focus:outline-none focus:ring-2 focus:ring-[#4285F4]/50
+    hover:bg-[#4285F4]/90
+    active:bg-[#4285F4];
+  }*/
+  button.b-google-secondary {
+    @apply text-gray-600
+    bg-white 
+    border border-gray-300
+    outline-none
+    focus:outline-none focus:ring-2 focus:ring-[#4285F4]/90
+    hover:outline-none hover:enabled:ring-1 hover:enabled:ring-[#4285F4]/90
+  active:enabled:bg-[#4285F4] active:enabled:text-white;
+  }
+  button.b-apple {
+    @apply text-white
+    bg-[#050708] 
+    focus:outline-none focus:ring-2 focus:ring-[#050708]/50
+    hover:bg-[#050708]/90
+    active:bg-[#050708];
+  }
+  button.b-twitter {
+    @apply text-white
+    bg-[#1da1f2] 
+    focus:outline-none focus:ring-2 focus:ring-[#1da1f2]/50
+    hover:bg-[#1da1f2]/90
+    active:bg-[#1da1f2];
+  }
+}

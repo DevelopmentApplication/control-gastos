@@ -13,6 +13,7 @@ import { RequestAuthRegistration } from '@models/auth/register.interface';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/shared.service';
 import { Alert } from '@models/alert';
+import { interval, take, timer } from 'rxjs';
 
 @Component({
   selector: 'app-sing-up',
@@ -24,6 +25,7 @@ export class SingUpComponent implements OnInit {
   signInFormGroup: FormGroup;
   genericError: GenericError | undefined;
   messageValidationEmail: string;
+  onLoad: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -55,52 +57,29 @@ export class SingUpComponent implements OnInit {
   }
 
   auth() {
+    this.onLoad = true;
+    timer(3000).subscribe((t) => {
+      this.sharedService.openAlert(
+        new Alert(
+          true,
+          TypeAlert.ERROR,
+          'You have 1 unread message',
+          true,
+          'New message'
+        )
+      );
+      this.onLoad = false;
+    });
+
     /*this.sharedService.openAlert(
       new Alert(
         true,
-        TypeAlert.PRIMARY,
-        'You have 1 unread message',
-        false,
-        'New message'
-      )
-    );
-    this.sharedService.openAlert(
-      new Alert(
-        true,
-        TypeAlert.SUCCESS,
-        'You have 1 unread message',
-        false,
-        'New message'
-      )
-    );
-    this.sharedService.openAlert(
-      new Alert(
-        true,
-        TypeAlert.ERROR,
-        'You have 1 unread message',
-        false,
-        'New message'
-      )
-    );
-    this.sharedService.openAlert(
-      new Alert(
-        true,
         TypeAlert.DEFAULT,
         'You have 1 unread message',
-        false,
+        true,
         'New message'
       )
     );*/
-
-    this.sharedService.openAlert(
-      new Alert(
-        true,
-        TypeAlert.DEFAULT,
-        'You have 1 unread message',
-        true,
-        'New message'
-      )
-    );
 
     /*const requestAuthRegistration: RequestAuthRegistration = {
       user: this.signInFormGroup.controls.email.value,

@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css'],
+  selector: 'app-social-button',
+  templateUrl: './social-button.component.html',
+  styleUrls: ['./social-button.component.css'],
 })
-export class ButtonComponent {
+export class SocialButtonComponent {
   @Input() text: string | undefined;
   @Input() type: string;
-  @Input() iconType: string;
-  @Input() onLoad: boolean;
+  @Input() social: string;
   @Input() disabled: boolean;
   @Output() callback = new EventEmitter();
 
