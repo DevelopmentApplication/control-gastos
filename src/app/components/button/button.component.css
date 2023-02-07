@@ -2,10 +2,9 @@
 @layer components {
   button {
     @apply relative flex items-center justify-center align-middle 
-    mb-2
     font-medium
     disabled:cursor-not-allowed 
-    disabled:opacity-95
+    disabled:opacity-80
     shadow-lg;
   }
   button.sm {

@@ -4,16 +4,13 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
-import { GenericError } from '@models/generic.error';
-import { ErrorType, TypeAlert } from '@shared/generic.enum';
 import { fadeInOut } from '@shared/animation';
 import { AuthService } from '@services/auth/auth.service';
-import { RequestAuthRegistration } from '@models/auth/register.interface';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/shared.service';
-import { Alert } from '@models/alert';
-import { interval, take, timer } from 'rxjs';
+import { RequestSignUp } from '@models/auth/signUp.interface';
 
 @Component({
   selector: 'app-sing-up',
@@ -22,9 +19,7 @@ import { interval, take, timer } from 'rxjs';
   animations: [fadeInOut()],
 })
 export class SingUpComponent implements OnInit {
-  signInFormGroup: FormGroup;
-  genericError: GenericError | undefined;
-  messageValidationEmail: string;
+  signUpFormGroup: FormGroup;
   onLoad: boolean;
 
   constructor(
@@ -39,16 +34,17 @@ export class SingUpComponent implements OnInit {
   }
 
   initForm(): void {
-    this.signInFormGroup = this.fb.group({
+    this.signUpFormGroup = this.fb.group({
       email: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.email],
       }),
       password: new FormControl(null, Validators.required),
+      acceptTerms: new FormControl(false, Validators.requiredTrue),
     });
 
-    this.signInFormGroup.controls.email.valueChanges.subscribe((val) => {
-      this.genericError = undefined;
+    this.signUpFormGroup.controls.acceptTerms.valueChanges.subscribe((val) => {
+      console.log(this.signUpFormGroup.controls.acceptTerms);
     });
   }
 
@@ -56,42 +52,31 @@ export class SingUpComponent implements OnInit {
     this.sharedService.closeAlert();
   }
 
+  disabledFormControl(option: boolean): void {
+    Object.keys(this.signUpFormGroup.controls).forEach((key: string) => {
+      const control = this.signUpFormGroup.controls[key];
+      control.disabled
+        ? control.enable({ emitEvent: false })
+        : control.disable({ emitEvent: false });
+    });
+  }
+
   auth() {
     this.onLoad = true;
-    timer(3000).subscribe((t) => {
-      this.sharedService.openAlert(
-        new Alert(
-          true,
-          TypeAlert.ERROR,
-          'You have 1 unread message',
-          true,
-          'New message'
-        )
-      );
-      this.onLoad = false;
-    });
-
-    /*this.sharedService.openAlert(
-      new Alert(
-        true,
-        TypeAlert.DEFAULT,
-        'You have 1 unread message',
-        true,
-        'New message'
-      )
-    );*/
-
-    /*const requestAuthRegistration: RequestAuthRegistration = {
-      user: this.signInFormGroup.controls.email.value,
-      email: this.signInFormGroup.controls.email.value,
-      password: this.signInFormGroup.controls.password.value,
+    this.disabledFormControl(true);
+    const requestSignUp: any = {
+      usersadsaname: this.signUpFormGroup.controls.email.value,
+      emaasdasdil: this.signUpFormGroup.controls.email.value,
+      password: this.signUpFormGroup.controls.password.value,
     };
-    this.authService.postRegistation(requestAuthRegistration).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: () => {},
-      complete: () => this.router.navigate(['welcome']),
-    });*/
+    this.authService
+      .signUp(requestSignUp)
+      .subscribe({
+        next: () => {},
+      })
+      .add(() => {
+        this.onLoad = false;
+        this.disabledFormControl(true);
+      });
   }
 }

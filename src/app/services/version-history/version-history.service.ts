@@ -5,7 +5,7 @@ import { tap, catchError, finalize, take } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpStatusCodeEnum } from '@shared/generic.enum';
 import { map } from 'rxjs';
-import { IVersionHistoryResponse } from '@models/version-history/version-history.interface';
+import { ResponseVersionHistory } from '@models/version-history/version-history.interface';
 import { GenericError } from '@models/generic.error';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class VersionHistoryService {
    */
   getVersions() {
     return this.httpClient
-      .get<IVersionHistoryResponse>(
+      .get<ResponseVersionHistory>(
         environment.RESTservices.baseUrl +
           environment.RESTservices.historialVersion.getHistorialVersiones +
           '?sort=createdAt:desc'

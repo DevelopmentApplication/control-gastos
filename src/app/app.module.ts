@@ -15,9 +15,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VersionHistoryService } from '@services/version-history/version-history.service';
 import { VersionHistoryComponent } from '@components/version-history/version-history.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './providers/auth.guard';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
 }
 
 @NgModule({
@@ -34,8 +40,14 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      },
+    }),
   ],
   providers: [
+    AuthGuard,
     VersionHistoryService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     {

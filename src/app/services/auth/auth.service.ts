@@ -1,42 +1,81 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize, take } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpStatusCodeEnum } from '@shared/generic.enum';
+import { HttpStatusCodeEnum, TypeAlert } from '@shared/generic.enum';
 import { map } from 'rxjs';
-import { RequestAuthRegistration } from '@models/auth/register.interface';
+import { RequestSignUp, ResponseSignUp } from '@models/auth/signUp.interface';
+import { StorageService } from '../storage/storage.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { SharedService } from '../../shared/shared.service';
+import { Alert } from '@models/alert';
+import { GenericError } from '@models/generic.error';
+import {
+  RequestSignIn,
+  ResponseSignIn,
+} from '../../models/auth/signIn.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private storageService: StorageService,
+    private sharedService: SharedService,
+    public jwtHelper: JwtHelperService
+  ) {}
 
   /**
    * Registation user
    */
-  postRegistation(requestAuthRegistration: RequestAuthRegistration) {
+  signUp(requestSignUp: RequestSignUp) {
     return this.httpClient
-      .post<any>(
+      .post<ResponseSignUp>(
         environment.RESTservices.baseUrl +
-          environment.RESTservices.authentication.register,
-        requestAuthRegistration
+          environment.RESTservices.auth.register,
+        requestSignUp
       )
       .pipe(
-        map((res) => res.data),
+        map((res) => {
+          this.storageService.setCurrentSession(res);
+          return res;
+        }),
         catchError((err) => this.handleGetError(err))
       );
   }
 
-  private handleGetError(err: any) {
-    switch (err.status) {
-      case HttpStatusCodeEnum.NOT_FOUND:
-        if (err && err.error && err.error.message) {
-          err.error.message;
-        }
-        break;
-    }
-    return throwError(err);
+  signIn(requestSignIn: RequestSignIn) {
+    return this.httpClient
+      .post<ResponseSignIn>(
+        environment.RESTservices.baseUrl + environment.RESTservices.auth.login,
+        requestSignIn
+      )
+      .pipe(
+        map((res) => {
+          this.storageService.setCurrentSession(res);
+          return res;
+        }),
+        catchError((err) => this.handleGetError(err.error))
+      );
+  }
+
+  private handleGetError(err: HttpErrorResponse) {
+    this.sharedService.openAlert(
+      new Alert(
+        true,
+        TypeAlert.ERROR,
+        err.message,
+        true,
+        `${err.status} ${err.name}`
+      )
+    );
+
+    return throwError(() => err);
+  }
+
+  public isAuthenticated(): boolean {
+    return !this.jwtHelper.isTokenExpired(localStorage.getItem('access_token'));
   }
 }

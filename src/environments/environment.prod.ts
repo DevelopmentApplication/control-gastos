@@ -4,9 +4,9 @@ export const environment = {
   RESTservices: {
     apiToken: '',
     baseUrl: '',
-    authentication: {
-      auth: '/api/auth/local',
+    auth: {
       register: '/api/auth/local/register',
+      login: '/api/auth/local',
     },
     historialVersion: {
       getHistorialVersiones: '/api/version-historyes',

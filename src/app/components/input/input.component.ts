@@ -18,6 +18,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() type: string;
   @Input() isError: boolean;
   @Input() floatLabel: string;
+  @Input() showIconEyes: boolean;
   value: string;
   changed: (val: any) => {};
   touched: () => {};
@@ -36,7 +37,15 @@ export class InputComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
+  toggleShowPassword() {
+    this.type = 'text';
+  }
+
   public onChange(event: Event) {
-    this.changed((<HTMLInputElement>event.target).value);
+    this.changed(
+      this.type === 'checkbox'
+        ? (<HTMLInputElement>event.target).checked
+        : (<HTMLInputElement>event.target).value
+    );
   }
 }

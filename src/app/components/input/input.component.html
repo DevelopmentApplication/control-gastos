@@ -2,7 +2,7 @@
   <input
     [id]="id"
     [type]="type"
-    [ngClass]="{ error: isError }"
+    [ngClass]="{ error: isError, 'pr-12': showIconEyes }"
     [value]="value"
     (input)="onChange($event)"
     (blur)="touched()"
@@ -10,6 +10,16 @@
     class="peer"
     placeholder=" "
   />
+  <div *ngIf="showIconEyes" class="absolute px-4 right-0 bottom-2.5">
+    <i
+      class="text-gray-400 hover:text-violet-600 cursor-pointer text-xl bi"
+      (click)="type === 'password' ? (type = 'text') : (type = 'password')"
+      [ngClass]="{
+        'bi-eye-fill': type === 'password',
+        'bi-eye-slash-fill': type !== 'password'
+      }"
+    ></i>
+  </div>
   <label [for]="id" class="float" [ngClass]="{ error: isError }">
     {{ floatLabel }}
   </label>

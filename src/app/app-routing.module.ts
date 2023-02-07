@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './providers/auth.guard';
 
 const routes: Routes = [
   {
     path: 'welcome',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/welcome/welcome.module').then((m) => m.WelcomeModule),
   },

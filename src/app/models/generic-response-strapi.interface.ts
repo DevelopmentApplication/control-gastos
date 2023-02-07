@@ -1,10 +1,10 @@
-export interface IMeta {
-    pagination: IPagination;
+export interface Meta {
+  pagination: Pagination;
 }
 
-export interface IPagination {
-    page:      number;
-    pageSize:  number;
-    pageCount: number;
-    total:     number;
+export interface Pagination {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
 }

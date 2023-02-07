@@ -1,8 +1,8 @@
 <div
-  class="min-h-full flex justify-end bg-gradient-to-br from-violet-400 to-violet-700"
+  class="min-h-full flex justify-end bg-gradient-to-br from-violet-500 to-violet-800"
 >
   <div
-    class="lg:max-w-2xl w-full h-auto bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-20 pb-6 space-y-6"
+    class="lg:max-w-2xl w-full h-auto bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-8 pb-6 space-y-6"
   >
     <div>
       <img
@@ -15,39 +15,38 @@
       >
         Create your Account
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-500">
+      <p class="text-center text-sm text-gray-500">
         Already registered?
-        <a href="#" class="font-medium text-violet-500 hover:text-violet-500"
+        <a
+          [routerLink]="['../signIn']"
+          class="font-medium text-violet-500 hover:text-violet-500"
           >Sign In</a
         >
       </p>
     </div>
     <div>
-      <form [formGroup]="signInFormGroup" class="space-y-4">
-        <div class="flex flex-col">
-          <app-social-button
-            [type]="'lg full b-google-secondary'"
-            [text]="'Sign Up with Google'"
-            [social]="'google'"
-          ></app-social-button>
-        </div>
-        <p class="mt-2 text-center text-sm text-gray-500">or</p>
-        <hr />
+      <form [formGroup]="signUpFormGroup" class="mt-6 space-y-5">
+        <app-social-button
+          [type]="'lg full b-google-secondary'"
+          [text]="'Sign Up with Google'"
+          [social]="'google'"
+        ></app-social-button>
+        <p class="text-center text-sm text-gray-500">or</p>
         <div>
           <app-input
             [id]="'email'"
             [type]="'email'"
             [floatLabel]="'Enter your email'"
             [isError]="
-              !signInFormGroup.controls.email.pristine &&
-              this.signInFormGroup.controls.email.invalid
+              !signUpFormGroup.controls.email.pristine &&
+              this.signUpFormGroup.controls.email.invalid
             "
             formControlName="email"
           ></app-input>
           <p class="text-red-600 my-1 text-xs">
             <span
               class="fadeIn"
-              *ngIf="signInFormGroup.controls.email.errors?.['email']"
+              *ngIf="signUpFormGroup.controls.email.errors?.['email']"
               >Invalid email</span
             >
           </p>
@@ -58,12 +57,34 @@
             [type]="'password'"
             [floatLabel]="'Enter your password'"
             [isError]="
-              !signInFormGroup.controls.password.pristine &&
-              this.signInFormGroup.controls.password.invalid
+              !signUpFormGroup.controls.password.pristine &&
+              this.signUpFormGroup.controls.password.invalid
             "
             formControlName="password"
+            [showIconEyes]="true"
           >
           </app-input>
+        </div>
+        <div class="flex items-center space-x-4">
+          <app-input
+            [id]="'acceptTerms'"
+            [type]="'checkbox'"
+            formControlName="acceptTerms"
+          ></app-input>
+          <label for="acceptTerms" class="text-center text-sm text-gray-500">
+            Agreed with our
+            <a
+              href="#"
+              class="font-medium text-violet-500 hover:text-violet-500"
+              >Terms of Services</a
+            >
+            and
+            <a
+              href="#"
+              class="font-medium text-violet-500 hover:text-violet-500"
+              >Privacy Policy.</a
+            >
+          </label>
         </div>
         <div>
           <app-button
@@ -71,7 +92,7 @@
             [text]="'Create account'"
             [iconType]="'bi bi-box-arrow-in-right'"
             [onLoad]="onLoad"
-            [disabled]="this.signInFormGroup.invalid && onLoad"
+            [disabled]="this.signUpFormGroup.invalid || onLoad"
             (callback)="auth()"
           ></app-button>
         </div>
