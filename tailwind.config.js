@@ -4,6 +4,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./src/**/*.{html,js}"],
+  purge: ["./src/**/*.{html,ts}"],
   theme: {
     screens: {
       sm: "480px",
@@ -26,5 +27,9 @@ module.exports = {
       violet: colors.violet,
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss"),
+    require("autoprefixer"),
+    require("@tailwindcss/typography"),
+  ],
 };
