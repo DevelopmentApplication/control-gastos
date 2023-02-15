@@ -1,3 +1,8 @@
+export interface ResponseAuth {
+  jwt: string;
+  user: User;
+}
+
 export interface Role {
   id: number;
   name: string;

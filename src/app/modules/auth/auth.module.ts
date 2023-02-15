@@ -9,12 +9,7 @@ import { SingInComponent } from './components/sing-in/sing-in.component';
 import { GenericErrorComponent } from './components/generic-error/generic-error.component';
 
 @NgModule({
-  declarations: [
-    AuthComponent,
-    SingUpComponent,
-    SingInComponent,
-    GenericErrorComponent,
-  ],
+  declarations: [AuthComponent, SingUpComponent, SingInComponent],
   imports: [CommonModule, AuthRoutingModule, SharedModule],
 })
 export class AuthModule {}

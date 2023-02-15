@@ -6,6 +6,7 @@ import { InputComponent } from '@components/input/input.component';
 import { AlertComponent } from '@components/alert/alert.component';
 import { ButtonComponent } from '../components/button/button.component';
 import { SocialButtonComponent } from '../components/social-button/social-button.component';
+import { LogoComponent } from '@components/logo/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SocialButtonComponent } from '../components/social-button/social-button
     AlertComponent,
     ButtonComponent,
     SocialButtonComponent,
+    LogoComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -23,6 +25,7 @@ import { SocialButtonComponent } from '../components/social-button/social-button
     AlertComponent,
     ButtonComponent,
     SocialButtonComponent,
+    LogoComponent,
   ],
 })
 export class SharedModule {}

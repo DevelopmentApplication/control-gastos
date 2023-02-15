@@ -1,11 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
-@import url("./app/components/button/button.component.css");
 @import "tailwindcss/utilities";
-
-@layer components {
-}
 
 @layer utilities {
   /*

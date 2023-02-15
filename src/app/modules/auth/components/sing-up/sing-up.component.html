@@ -1,15 +1,11 @@
 <div
-  class="min-h-full flex justify-end bg-gradient-to-br from-violet-500 to-violet-800"
+  class="min-h-full flex justify-end bg-gradient-to-br from-violet-400 to-violet-700"
 >
   <div
     class="lg:max-w-2xl w-full h-auto bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-8 pb-6 space-y-6"
   >
     <div>
-      <img
-        class="mx-auto h-12 w-auto"
-        src="https://tailwindui.com/img/logos/mark.svg?color=violet&shade=500"
-        alt="Your Company"
-      />
+      <app-logo [type]="'isotipo'"></app-logo>
       <h2
         class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
       >
@@ -30,6 +26,7 @@
           [type]="'lg full b-google-secondary'"
           [text]="'Sign Up with Google'"
           [social]="'google'"
+          (callback)="redirectAuthGoogle()"
         ></app-social-button>
         <p class="text-center text-sm text-gray-500">or</p>
         <div>
@@ -92,14 +89,13 @@
             [text]="'Create account'"
             [iconType]="'bi bi-box-arrow-in-right'"
             [onLoad]="onLoad"
-            [disabled]="this.signUpFormGroup.invalid || onLoad"
             (callback)="auth()"
           ></app-button>
         </div>
       </form>
     </div>
     <div>
-      <app-alert></app-alert>
+      <ng-template #dynamicAuthAlertComponent></ng-template>
     </div>
   </div>
 </div>

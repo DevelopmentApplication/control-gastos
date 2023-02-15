@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ResponseSignUp } from '@models/auth/signUp.interface';
+import { ResponseAuth } from '@models/auth/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { ResponseSignUp } from '@models/auth/signUp.interface';
 export class StorageService {
   constructor(private router: Router) {}
 
-  setCurrentSession(res: ResponseSignUp): void {
+  setCurrentSession(res: ResponseAuth): void {
     localStorage.setItem('access_token', JSON.stringify(res.jwt));
     localStorage.setItem('user', JSON.stringify(res.user));
     localStorage.setItem('rol', JSON.stringify(res.user.role));

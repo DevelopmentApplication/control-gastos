@@ -1,43 +1,35 @@
+import { ComponentRef } from '@angular/core';
+
 export class Alert {
-  show: boolean;
   type: string;
   detail: string;
   title: string;
   listmessage: string[];
-  icon: boolean;
   closeable: boolean;
 
   /**
    * @constructor
-   * @augments[show] component visibility
+   * @augments[type] Alert Type. @example 'default', 'success' or 'error'
    */
-  constructor(show: boolean);
+  constructor(type: string);
   /**
    * @constructor
    * @type Alert simple
-   * @augments[show] Component visibility
    * @augments[type] Alert Type. @example 'default', 'success' or 'error'
    * @augments[detail] Message to display
    * @augments[closeable] Indicates the component is closable
    */
-  constructor(
-    show: boolean,
-    type?: string,
-    detail?: string,
-    closeable?: boolean
-  );
+  constructor(type: string, detail?: string, closeable?: boolean);
   /**
    * @constructor
    * @type Alert with title
-   * @augments[show] Component visibility
    * @augments[type] Alert Type. @example 'default', 'success' or 'error'
    * @augments[detail] Message to display
    * @augments[closeable] Indicates the component is closable
    * @augments[title] Title of alert
    */
   constructor(
-    show: boolean,
-    type?: string,
+    type: string,
     detail?: string,
     closeable?: boolean,
     title?: string
@@ -45,7 +37,6 @@ export class Alert {
   /**
    * @constructor
    * @type Alert with enumeration
-   * @augments[show] Component visibility
    * @augments[type] Alert Type @example 'default', 'success' or 'error'
    * @augments[detail] Message to display
    * @augments[closeable] Indicates the component is closable
@@ -53,15 +44,12 @@ export class Alert {
    * @augments[listmessage] List of messages to enumerate
    */
   constructor(
-    show: boolean,
-    type?: string,
+    type: string,
     detail?: string,
     closeable?: boolean,
     title?: string,
     listmessage?: string[]
   ) {
-    this.show = show;
-
     if (type) {
       this.type = type;
     }
@@ -81,11 +69,6 @@ export class Alert {
 }
 
 export interface IAlert {
-  show: boolean;
-  type: string;
-  detail?: string;
-  title?: string;
-  listmessage?: string[];
-  icon?: boolean;
-  closeable?: boolean;
+  data: Alert | undefined;
+  componentRef: ComponentRef<IAlert>;
 }

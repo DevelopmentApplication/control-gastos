@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, ComponentRef, Input } from '@angular/core';
 import { TypeAlert } from '@shared/generic.enum';
 import { Observable } from 'rxjs';
 import { SharedService } from '@shared/shared.service';
-import { Alert, IAlert } from '../../models/alert';
+import { Alert, IAlert } from '@models/alert';
 import { fadeInOut } from '@shared/animation';
+import { Target } from '@angular/compiler';
 
 @Component({
   selector: 'app-alert',
@@ -11,27 +12,17 @@ import { fadeInOut } from '@shared/animation';
   styleUrls: ['./alert.component.css'],
   animations: [fadeInOut()],
 })
-export class AlertComponent {
-  alert: IAlert;
+export class AlertComponent implements IAlert {
+  data: Alert | undefined;
+  componentRef: ComponentRef<IAlert>;
 
-  constructor(private SharedService: SharedService) {
-    this.SharedService.changeAlert.subscribe((res) => {
-      this.alert = {
-        show: res.show,
-        type: res.type,
-        title: res.title ? res.title : undefined,
-        detail: res.detail ? res.detail : undefined,
-        listmessage: res.listmessage ? res.listmessage : undefined,
-        closeable: res.closeable ? res.closeable : undefined,
-      };
-    });
-  }
+  constructor(private SharedService: SharedService) {}
 
   get typeAlert(): typeof TypeAlert {
     return TypeAlert;
   }
 
   close() {
-    this.alert.show = false;
+    this.SharedService.destroyComponentAlert(this.componentRef);
   }
 }

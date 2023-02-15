@@ -9,6 +9,8 @@ export const environment = {
     auth: {
       register: '/api/auth/local/register',
       login: '/api/auth/local',
+      provider: '/api/auth/{provider}/callback?access_token={access_token}',
+      authGoogle: '/api/connect/google',
     },
     historialVersion: {
       getHistorialVersiones: '/api/version-histories',

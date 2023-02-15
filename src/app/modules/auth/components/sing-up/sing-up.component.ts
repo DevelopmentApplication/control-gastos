@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +17,9 @@ import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/shared.service';
 import { RequestSignUp } from '@models/auth/signUp.interface';
+import { Alert, IAlert } from '@models/alert';
+import { TypeAlert } from '@shared/generic.enum';
+import { AlertComponent } from '@components/alert/alert.component';
 
 @Component({
   selector: 'app-sing-up',
@@ -21,6 +30,8 @@ import { RequestSignUp } from '@models/auth/signUp.interface';
 export class SingUpComponent implements OnInit {
   signUpFormGroup: FormGroup;
   onLoad: boolean;
+  @ViewChild('dynamicAuthAlertComponent', { read: ViewContainerRef })
+  viewContainerRef: ViewContainerRef;
 
   constructor(
     private fb: FormBuilder,
@@ -48,9 +59,7 @@ export class SingUpComponent implements OnInit {
     });
   }
 
-  close() {
-    this.sharedService.closeAlert();
-  }
+  close() {}
 
   disabledFormControl(option: boolean): void {
     Object.keys(this.signUpFormGroup.controls).forEach((key: string) => {
@@ -62,7 +71,9 @@ export class SingUpComponent implements OnInit {
   }
 
   auth() {
-    this.onLoad = true;
+    const dataAlert = new Alert(TypeAlert.ERROR, 'HOLASA', true, 'Titulo');
+    this.sharedService.generateComponentAlert(this.viewContainerRef, dataAlert);
+    /*this.onLoad = true;
     this.disabledFormControl(true);
     const requestSignUp: any = {
       usersadsaname: this.signUpFormGroup.controls.email.value,
@@ -73,10 +84,26 @@ export class SingUpComponent implements OnInit {
       .signUp(requestSignUp)
       .subscribe({
         next: () => {},
+        error: (err) => {
+          this.sharedService.openAlert(
+            new Alert(
+              true,
+              TypeAlert.PRIMARY,
+              err.message,
+              true,
+              `${err.status} ${err.name}`
+            )
+          );
+          this.showauthalert = true;
+        },
       })
       .add(() => {
         this.onLoad = false;
         this.disabledFormControl(true);
-      });
+      });*/
+  }
+
+  redirectAuthGoogle() {
+    this.authService.redirectAuthGoogle();
   }
 }

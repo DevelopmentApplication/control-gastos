@@ -1,0 +1,12 @@
+.logotipo {
+  @apply w-12 h-12 bg-cover mx-auto;
+}
+.isotipo {
+  @apply bg-[url(../../../../assets/icons/isotipo.svg)];
+}
+.imagotipo {
+  @apply bg-[url(../../../../assets/icons/isotipo.svg)];
+}
+.imagotipo.dm {
+  @apply bg-[url(../../../../assets/icons/isotipo.svg)];
+}

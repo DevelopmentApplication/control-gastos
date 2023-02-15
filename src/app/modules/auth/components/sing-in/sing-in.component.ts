@@ -9,6 +9,7 @@ import { RequestSignIn } from '@models/auth/signIn.interface';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { SharedService } from '../../../../shared/shared.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../environments/environment.dev';
 
 @Component({
   selector: 'app-sing-in',
@@ -40,9 +41,7 @@ export class SingInComponent {
     });
   }
 
-  close() {
-    this.sharedService.closeAlert();
-  }
+  close() {}
 
   disabledFormControl(option: boolean): void {
     Object.keys(this.signInFormGroup.controls).forEach((key: string) => {
@@ -65,5 +64,9 @@ export class SingInComponent {
         this.disabledFormControl(true);
       },
     });
+  }
+
+  redirectAuthGoogle() {
+    this.authService.redirectAuthGoogle();
   }
 }

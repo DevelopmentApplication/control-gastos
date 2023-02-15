@@ -29,6 +29,7 @@
             [type]="'lg full b-google-secondary'"
             [text]="'Sign in with Google'"
             [social]="'google'"
+            (callback)="redirectAuthGoogle()"
           ></app-social-button>
         </div>
         <p class="mt-2 text-center text-sm text-gray-500">or</p>

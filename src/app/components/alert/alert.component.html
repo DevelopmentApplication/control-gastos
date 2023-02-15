@@ -1,5 +1,5 @@
-<div @fadeInOut *ngIf="alert?.show" [class]="alert.type" role="alert">
-  <div [ngSwitch]="alert.type">
+<div id="alert-1" @fadeInOut [class]="data?.type" role="alert">
+  <div [ngSwitch]="data?.type">
     <div *ngSwitchCase="typeAlert.DEFAULT">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -82,16 +82,21 @@
     </div>
   </div>
   <div class="w-full">
-    <h3 *ngIf="alert?.title" class="font-bold">{{ alert.title }}</h3>
-    <div *ngIf="alert?.detail" class="text-xs">{{ alert.detail }}</div>
-    <div *ngIf="alert?.listmessage">
-      <div *ngFor="let messagge of alert?.listmessage">
+    <h3 *ngIf="data?.title" class="font-bold">{{ data?.title }}</h3>
+    <div *ngIf="data?.detail" class="text-xs">{{ data?.detail }}</div>
+    <div *ngIf="data?.listmessage">
+      <div *ngFor="let messagge of data?.listmessage">
         <div class="text-xs">{{ messagge }}</div>
       </div>
     </div>
   </div>
-  <div *ngIf="alert?.closeable">
-    <button type="button" data-dismiss-target="#alert-1" (click)="close()">
+  <div *ngIf="data?.closeable">
+    <button
+      type="button"
+      data-dismiss-target="#alert-1"
+      aria-label="Close"
+      (click)="close()"
+    >
       <span class="sr-only">Close</span>
       <i class="bi bi-x-lg"></i>
     </button>
