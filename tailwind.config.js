@@ -27,9 +27,5 @@ module.exports = {
       violet: colors.violet,
     },
   },
-  plugins: [
-    require("tailwindcss"),
-    require("autoprefixer"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };

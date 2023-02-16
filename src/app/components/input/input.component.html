@@ -20,7 +20,12 @@
       }"
     ></i>
   </div>
-  <label [for]="id" class="float" [ngClass]="{ error: isError }">
+  <label
+    *ngIf="floatLabel"
+    [for]="id"
+    class="float"
+    [ngClass]="{ error: isError }"
+  >
     {{ floatLabel }}
   </label>
 </div>
