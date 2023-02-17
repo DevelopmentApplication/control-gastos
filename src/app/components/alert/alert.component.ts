@@ -1,12 +1,13 @@
-import { Component, ComponentRef, Input } from '@angular/core';
+import { Component, ComponentRef } from '@angular/core';
 import { TypeAlert } from '@shared/generic.enum';
-import { Observable } from 'rxjs';
 import { SharedService } from '@shared/shared.service';
 import { Alert, IAlert } from '@models/alert';
 import { fadeInOut } from '@shared/animation';
-import { Target } from '@angular/compiler';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css'],

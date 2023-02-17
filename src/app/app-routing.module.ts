@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './providers/auth.guard';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { PrivacyComponent } from '@pages/privacy/privacy.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       import('./modules/redirect/redirect.module').then(
         (m) => m.RedirectModule
       ),
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent,
   },
   {
     path: '**',

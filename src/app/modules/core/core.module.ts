@@ -17,6 +17,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InterceptorService } from 'src/app/providers/interceptor';
 import { ErrorInterceptorService } from 'src/app/providers/error.interceptor';
+import { SharedModule } from '../../shared/shared.module';
+import { ButtonComponent } from '../../components/button/button.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,13 +29,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [
-    VersionHistoryComponent,
-    NotfoundComponent,
-    PrivacyComponent,
-    TermsComponent,
-    AcceptTermComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -49,7 +45,9 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
       },
     }),
+    SharedModule,
   ],
+  exports: [SharedModule],
   providers: [
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
