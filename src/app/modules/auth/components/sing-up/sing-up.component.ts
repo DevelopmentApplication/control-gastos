@@ -71,39 +71,43 @@ export class SingUpComponent implements OnInit {
   }
 
   auth() {
-    const dataAlert = new Alert(TypeAlert.ERROR, 'HOLASA', true, 'Titulo');
-    this.sharedService.generateComponentAlert(this.viewContainerRef, dataAlert);
-    /*this.onLoad = true;
-    this.disabledFormControl(true);
-    const requestSignUp: any = {
-      usersadsaname: this.signUpFormGroup.controls.email.value,
-      emaasdasdil: this.signUpFormGroup.controls.email.value,
-      password: this.signUpFormGroup.controls.password.value,
-    };
+    this.onLoading(true);
     this.authService
-      .signUp(requestSignUp)
+      .signUp(this.requestSignUp())
       .subscribe({
-        next: () => {},
+        next: () => this.router.navigate(['/dashboard']),
         error: (err) => {
-          this.sharedService.openAlert(
+          this.sharedService.generateComponentAlert(
+            this.viewContainerRef,
             new Alert(
-              true,
               TypeAlert.PRIMARY,
               err.message,
               true,
               `${err.status} ${err.name}`
             )
           );
-          this.showauthalert = true;
         },
       })
       .add(() => {
-        this.onLoad = false;
-        this.disabledFormControl(true);
-      });*/
+        this.onLoading(false);
+      });
   }
 
   redirectAuthGoogle() {
+    this.onLoading(true);
     this.authService.redirectAuthGoogle();
+  }
+
+  onLoading(toggle: boolean): void {
+    this.onLoad = toggle;
+    this.disabledFormControl(toggle);
+  }
+
+  requestSignUp(): RequestSignUp {
+    return {
+      username: this.signUpFormGroup.controls.email.value,
+      email: this.signUpFormGroup.controls.email.value,
+      password: this.signUpFormGroup.controls.password.value,
+    };
   }
 }

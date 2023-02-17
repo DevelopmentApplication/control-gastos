@@ -8,53 +8,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InterceptorService } from './providers/interceptor';
-import { ErrorInterceptorService } from './providers/error.interceptor';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { VersionHistoryService } from '@services/version-history/version-history.service';
-import { VersionHistoryComponent } from '@components/version-history/version-history.component';
-import { JwtModule } from '@auth0/angular-jwt';
-import { AuthGuard } from './providers/auth.guard';
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-export function tokenGetter() {
-  return localStorage.getItem('access_token');
-}
+import { CoreModule } from './modules/core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, VersionHistoryComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-      },
-    }),
-  ],
-  providers: [
-    AuthGuard,
-    VersionHistoryService,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptorService,
-      multi: true,
-    },
+    CoreModule,
   ],
   bootstrap: [AppComponent],
 })

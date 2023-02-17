@@ -89,6 +89,7 @@
             [text]="'Create account'"
             [iconType]="'bi bi-box-arrow-in-right'"
             [onLoad]="onLoad"
+            [disabled]="this.signUpFormGroup.invalid || onLoad"
             (callback)="auth()"
           ></app-button>
         </div>

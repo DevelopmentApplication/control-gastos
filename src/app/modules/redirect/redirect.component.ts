@@ -19,7 +19,7 @@ export class RedirectComponent implements OnInit {
       this.authService
         .authProvider('google', params['access_token'])
         .subscribe({
-          next: () => this.router.navigate(['/welcome']),
+          next: () => this.router.navigate(['/dashboard']),
         });
     });
   }
