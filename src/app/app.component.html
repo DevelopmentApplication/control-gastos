@@ -1,2 +1,7 @@
-<app-button [type]="'lg auto action'" [text]="'app'"></app-button>
-<router-outlet> </router-outlet>
+<router-outlet>
+  <div
+    class="w-full sm:w-fit sm:right-4 sm:top-4 flex flex-col items-center sm:items-end absolute z-50"
+  >
+    <ng-template #genericNotificationComponent></ng-template>
+  </div>
+</router-outlet>

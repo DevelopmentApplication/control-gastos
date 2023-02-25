@@ -5,6 +5,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SingInComponent } from './components/sing-in/sing-in.component';
 import { SingUpComponent } from './components/sing-up/sing-up.component';
 import { NotfoundComponent } from '../../pages/notfound/notfound.component';
+import { ForgottenPasswordComponent } from './components/forgotten-password/forgotten-password.component';
 
 const routes: Routes = [
   {
@@ -18,9 +19,12 @@ const routes: Routes = [
     component: SingUpComponent,
   },
   {
-    path: 'password/reset',
-    canActivate: [AuthGuard],
+    path: 'reset/password',
     component: ResetPasswordComponent,
+  },
+  {
+    path: 'forgotten/password',
+    component: ForgottenPasswordComponent,
   },
   {
     path: '**',

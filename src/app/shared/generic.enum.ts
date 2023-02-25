@@ -60,7 +60,12 @@ export enum HttpStatusCodeEnum {
   NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
 
-export enum TypeAlert {
+export enum GenericErrorMessagge {
+  TITLE = 'Sorry, an error has occurred',
+  MESSAGGE = 'Please try again later.',
+}
+
+export enum TypeNotification {
   DEFAULT = 'default',
   WARNING = 'warning',
   ERROR = 'error',
@@ -68,6 +73,17 @@ export enum TypeAlert {
   PRIMARY = 'primary',
 }
 
+export enum TypeButton {
+  DEFAULT = 'default',
+  PRIMARY = 'primary',
+  ACTION = 'action',
+}
+
 export enum ErrorType {
   ACCOUNT_NOT_FOUND = 'ACCOUNT_NOT_FOUND',
+}
+
+export enum TypeLogo {
+  ISOTYPE = 'isotype',
+  IMAGOTYPE = 'imagotype',
 }

@@ -47,7 +47,6 @@ export function tokenGetter() {
     }),
     SharedModule,
   ],
-  exports: [SharedModule],
   providers: [
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

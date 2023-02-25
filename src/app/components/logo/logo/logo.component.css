@@ -1,12 +1,12 @@
-.logotipo {
-  @apply w-12 h-12 bg-cover mx-auto;
+.logotype {
+  @apply bg-cover mx-auto;
 }
-.isotipo {
-  @apply bg-[url(../../../../assets/icons/isotipo.svg)];
+.isotype {
+  @apply w-12 h-12 bg-[url(../../../../assets/icons/isotype.svg)];
 }
-.imagotipo {
-  @apply bg-[url(../../../../assets/icons/isotipo.svg)];
+.imagotype {
+  @apply w-60 h-12 bg-[url(../../../../assets/icons/imagotype.svg)];
 }
-.imagotipo.dm {
-  @apply bg-[url(../../../../assets/icons/isotipo.svg)];
+.imagotype.dm {
+  @apply bg-[url(../../../../assets/icons/imagotypeDM.svg)];
 }

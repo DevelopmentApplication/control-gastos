@@ -10,6 +10,8 @@ export const environment = {
       login: '/api/auth/local',
       provider: '/auth/{provider}/callback?access_token={access_token}',
       authGoogle: '/api/connect/google',
+      forgot: '/api/auth/forgot-password',
+      reset: '/api/auth/reset-password',
     },
     historialVersion: {
       getHistorialVersiones: '/api/version-histories',

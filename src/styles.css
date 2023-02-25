@@ -3,31 +3,43 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer utilities {
-  /*
-    Custom animated FadeIn 
-    FadeOut not supported with ng-If directive)
-  */
-  @keyframes fadeInAlert {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+@import url("./app/components/button/button.component.css");
+@import url("./app/components/notification/notification.component.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&display=swap");
+
+@layer base {
+  html {
+    font-family: "Montserrat", system-ui, sans-serif;
+    @apply text-gray-800;
   }
-  .fadeIn.alert {
-    animation: fadeInAlert 1s;
+  h1 {
+    @apply text-3xl font-extrabold  tracking-tight;
   }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  h2 {
+    @apply text-2xl font-extrabold;
   }
-  .fadeIn {
-    animation: fadeIn 1s;
+  h3 {
+    @apply text-xl font-extrabold;
+  }
+  h4 {
+    @apply text-lg font-extrabold;
+  }
+  h5 {
+    @apply text-base font-extrabold;
+  }
+  h6 {
+    @apply text-sm font-extrabold;
+  }
+  a {
+    @apply text-violet-500 font-semibold hover:cursor-pointer hover:text-violet-700 hover:underline;
+  }
+  p {
+    @apply text-base;
+  }
+  p.error {
+    @apply text-red-600;
+  }
+  .primary {
+    @apply text-violet-700;
   }
 }

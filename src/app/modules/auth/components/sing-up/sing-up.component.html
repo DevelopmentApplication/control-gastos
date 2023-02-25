@@ -2,101 +2,78 @@
   class="min-h-full flex justify-end bg-gradient-to-br from-violet-400 to-violet-700"
 >
   <div
-    class="lg:max-w-2xl w-full h-auto bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-8 pb-6 space-y-6"
+    class="lg:max-w-2xl w-full h-auto flex flex-col justify-center bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-8 pb-6 space-y-6"
   >
+    <app-logo></app-logo>
     <div>
-      <app-logo [type]="'isotipo'"></app-logo>
-      <h2
-        class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
-      >
-        Create your Account
-      </h2>
-      <p class="text-center text-sm text-gray-500">
+      <h1 class="text-center">Create your Account</h1>
+      <p class="text-center">
         Already registered?
-        <a
-          [routerLink]="['../signIn']"
-          class="font-medium text-violet-500 hover:text-violet-500"
-          >Sign In</a
-        >
+        <a [routerLink]="['../signIn']">Sign In</a>
       </p>
     </div>
-    <div>
-      <form [formGroup]="signUpFormGroup" class="mt-6 space-y-5">
-        <app-social-button
-          [type]="'lg full b-google-secondary'"
-          [text]="'Sign Up with Google'"
-          [social]="'google'"
-          (callback)="redirectAuthGoogle()"
-        ></app-social-button>
-        <p class="text-center text-sm text-gray-500">or</p>
-        <div>
-          <app-input
-            [id]="'email'"
-            [type]="'email'"
-            [floatLabel]="'Enter your email'"
-            [isError]="
-              !signUpFormGroup.controls.email.pristine &&
-              this.signUpFormGroup.controls.email.invalid
-            "
-            formControlName="email"
-          ></app-input>
-          <p class="text-red-600 my-1 text-xs">
-            <span
-              class="fadeIn"
-              *ngIf="signUpFormGroup.controls.email.errors?.['email']"
-              >Invalid email</span
-            >
-          </p>
-        </div>
-        <div>
-          <app-input
-            [id]="'password'"
-            [type]="'password'"
-            [floatLabel]="'Enter your password'"
-            [isError]="
-              !signUpFormGroup.controls.password.pristine &&
-              this.signUpFormGroup.controls.password.invalid
-            "
-            formControlName="password"
-            [showIconEyes]="true"
-          >
-          </app-input>
-        </div>
-        <div class="flex items-center space-x-4">
-          <app-input
-            [id]="'acceptTerms'"
-            [type]="'checkbox'"
-            formControlName="acceptTerms"
-          ></app-input>
-          <label for="acceptTerms" class="text-center text-sm text-gray-500">
-            Agreed with our
-            <a
-              href="#"
-              class="font-medium text-violet-500 hover:text-violet-500"
-              >Terms of Services</a
-            >
-            and
-            <a
-              href="#"
-              class="font-medium text-violet-500 hover:text-violet-500"
-              >Privacy Policy.</a
-            >
-          </label>
-        </div>
-        <div>
-          <!-- <app-button
-            [type]="'lg full action'"
-            [text]="'Create account'"
-            [iconType]="'bi bi-box-arrow-in-right'"
-            [onLoad]="onLoad"
-            [disabled]="this.signUpFormGroup.invalid || onLoad"
-            (callback)="auth()"
-          ></app-button> -->
-        </div>
-      </form>
-    </div>
-    <div>
-      <ng-template #dynamicAuthAlertComponent></ng-template>
-    </div>
+    <form [formGroup]="f" class="mt-6 space-y-5">
+      <app-social-button
+        [type]="'md auto b-google-secondary'"
+        [text]="'Sign Up with Google'"
+        [social]="'google'"
+        (callback)="redirectAuthGoogle()"
+      ></app-social-button>
+      <p class="text-center">or continues with credentials</p>
+      <div>
+        <app-input
+          [id]="'email'"
+          [type]="'email'"
+          [floatLabel]="'Enter your email'"
+          [isError]="!f.controls.email.pristine && f.controls.email.invalid"
+          formControlName="email"
+        ></app-input>
+        <p
+          *ngIf="f.controls.email.errors?.['email']"
+          [@fadeInOutAnimation]
+          class="error my-1 text-xs"
+        >
+          Invalid email
+        </p>
+      </div>
+      <div>
+        <app-input
+          [id]="'password'"
+          [type]="'password'"
+          [floatLabel]="'Enter your password'"
+          [isError]="
+            !f.controls.password.pristine && f.controls.password.invalid
+          "
+          formControlName="password"
+          [showIconEyes]="true"
+        >
+        </app-input>
+      </div>
+      <div class="flex items-center space-x-4">
+        <app-input
+          [id]="'acceptTerms'"
+          [type]="'checkbox'"
+          formControlName="acceptTerms"
+        ></app-input>
+        <label for="acceptTerms" class="text-center text-sm">
+          Agreed with our
+          <a [routerLink]="['../../terms']">Terms of Services</a>
+          and
+          <a [routerLink]="['../../privacy']">Privacy Policy.</a>
+        </label>
+      </div>
+      <div>
+        <app-button
+          [size]="'md'"
+          [width]="'full'"
+          [type]="'action'"
+          [text]="'Create account'"
+          [iconType]="'bi bi-box-arrow-in-right'"
+          [onLoad]="onLoad"
+          [disabled]="f.invalid || onLoad"
+          (callback)="auth()"
+        ></app-button>
+      </div>
+    </form>
   </div>
 </div>

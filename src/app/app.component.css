@@ -1,0 +1,6 @@
+p.rojo {
+  @apply text-red-600;
+}
+p.verde {
+  @apply text-green-600;
+}

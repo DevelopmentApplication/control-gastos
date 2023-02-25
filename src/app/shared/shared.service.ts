@@ -6,33 +6,50 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Alert, IAlert } from '../models/alert';
-import { TypeAlert } from '@shared/generic.enum';
-import { AlertComponent } from '@components/alert/alert.component';
+import { Notification, INotification } from '../models/notification';
+import { TypeNotification } from '@shared/generic.enum';
+import { NotificationComponent } from '@components/notification/notification.component';
+import { AppComponent } from '../app.component';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  @Output() changeAlert: EventEmitter<Alert> = new EventEmitter();
+  sharedViewContainerRef: ViewContainerRef;
 
   /**
-   * @param ref Reference to element create dynamic
-   * @param data type IAlert
+   * notification component create
+   * @param data type INotification
    */
-  generateComponentAlert(
-    viewContainerRef: ViewContainerRef,
-    data: Alert
-  ): void {
+  createComponentNotification(data: Notification): void {
     const componentRef =
-      viewContainerRef?.createComponent<IAlert>(AlertComponent);
+      this.sharedViewContainerRef?.createComponent<INotification>(
+        NotificationComponent
+      );
     componentRef
       ? ((componentRef.instance.data = data),
         (componentRef.instance.componentRef = componentRef))
       : null;
   }
 
-  destroyComponentAlert(componentRef: ComponentRef<IAlert>) {
+  /**
+   * notification component destroy
+   * @param componentRef
+   */
+  destroyComponentNotification(componentRef: ComponentRef<INotification>) {
     componentRef.destroy();
+  }
+
+  /**
+   * disabled control of formgroup
+   */
+  disabledFormControl(form: FormGroup, option: boolean): void {
+    Object.keys(form.controls).forEach((key: string) => {
+      const control = form.controls[key];
+      option
+        ? control.disable({ emitEvent: false })
+        : control.enable({ emitEvent: false });
+    });
   }
 }

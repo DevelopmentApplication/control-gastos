@@ -9,7 +9,7 @@ import { StorageService } from '@services/storage/storage.service';
 export class DashboardComponent {
   constructor(private storageService: StorageService) {}
 
-  logOut() {
+  logout() {
     this.storageService.clean();
   }
 }

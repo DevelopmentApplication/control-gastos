@@ -1,13 +1,20 @@
-<div id="alert-1" @fadeInOut [class]="data?.type" role="alert">
+<div
+  id="notification-1"
+  [@fadeOut]
+  [@scrollAnimation]="animationState"
+  [class]="data?.type"
+  role="notification"
+  *ngIf="!closed"
+>
   <div [ngSwitch]="data?.type">
-    <div *ngSwitchCase="typeAlert.DEFAULT">
+    <div *ngSwitchCase="typeNotification.DEFAULT">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6 mr-2 stroke-violet-800"
+        class="stroke-violet-800"
       >
         <path
           stroke-linecap="round"
@@ -16,14 +23,13 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeAlert.ERROR">
+    <div *ngSwitchCase="typeNotification.ERROR">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6 mr-2"
       >
         <path
           stroke-linecap="round"
@@ -32,14 +38,13 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeAlert.WARNING">
+    <div *ngSwitchCase="typeNotification.WARNING">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6 mr-2"
       >
         <path
           stroke-linecap="round"
@@ -48,14 +53,13 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeAlert.SUCCESS">
+    <div *ngSwitchCase="typeNotification.SUCCESS">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6 mr-2"
       >
         <path
           stroke-linecap="round"
@@ -64,14 +68,13 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeAlert.PRIMARY">
+    <div *ngSwitchCase="typeNotification.PRIMARY">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6 mr-2"
       >
         <path
           stroke-linecap="round"
@@ -82,18 +85,18 @@
     </div>
   </div>
   <div class="w-full">
-    <h3 *ngIf="data?.title" class="font-bold">{{ data?.title }}</h3>
-    <div *ngIf="data?.detail" class="text-xs">{{ data?.detail }}</div>
+    <h6 *ngIf="data?.title">{{ data?.title }}</h6>
+    <p *ngIf="data?.message">{{ data?.message }}</p>
     <div *ngIf="data?.listmessage">
-      <div *ngFor="let messagge of data?.listmessage">
-        <div class="text-xs">{{ messagge }}</div>
-      </div>
+      <ul *ngFor="let messagge of data?.listmessage">
+        <li>{{ messagge }}</li>
+      </ul>
     </div>
   </div>
   <div *ngIf="data?.closeable">
     <button
       type="button"
-      data-dismiss-target="#alert-1"
+      data-dismiss-target="#notification-1"
       aria-label="Close"
       (click)="close()"
     >

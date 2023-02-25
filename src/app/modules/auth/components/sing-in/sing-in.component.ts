@@ -10,6 +10,7 @@ import { AuthService } from '../../../../services/auth/auth.service';
 import { SharedService } from '../../../../shared/shared.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment.dev';
+import { TypeLogo } from '@shared/generic.enum';
 
 @Component({
   selector: 'app-sing-in',
@@ -17,8 +18,9 @@ import { environment } from '../../../../../environments/environment.dev';
   styleUrls: ['./sing-in.component.css'],
 })
 export class SingInComponent {
-  signInFormGroup: FormGroup;
+  SignInFormGroup: FormGroup;
   onLoad: boolean;
+  logo = TypeLogo.IMAGOTYPE;
 
   constructor(
     private fb: FormBuilder,
@@ -32,41 +34,58 @@ export class SingInComponent {
   }
 
   initForm(): void {
-    this.signInFormGroup = this.fb.group({
+    this.SignInFormGroup = this.fb.group({
       identifier: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.email],
       }),
       password: new FormControl(null, Validators.required),
     });
   }
 
-  close() {}
-
-  disabledFormControl(option: boolean): void {
-    Object.keys(this.signInFormGroup.controls).forEach((key: string) => {
-      const control = this.signInFormGroup.controls[key];
-      option ? control.disable : control.enable;
-    });
-  }
-
-  auth() {
-    this.onLoad = true;
-    this.disabledFormControl(true);
-    const RequestSignIn: RequestSignIn = {
-      identifier: this.signInFormGroup.controls.identifier.value,
-      password: this.signInFormGroup.controls.password.value,
-    };
-    this.authService.signIn(RequestSignIn).subscribe({
-      next: () => {},
-      complete: () => {
-        this.onLoad = false;
-        this.disabledFormControl(true);
-      },
-    });
+  /**
+   * call services to auth
+   */
+  auth(): void {
+    this.loading(true);
+    this.authService
+      .signIn(this.requestSignIn())
+      .subscribe({
+        next: () => {
+          this.authService.successResponse(
+            '',
+            'User registered successfully.',
+            '/dashboard'
+          );
+        },
+      })
+      .add(() => {
+        this.loading(false);
+      });
   }
 
   redirectAuthGoogle() {
+    this.loading(true);
     this.authService.redirectAuthGoogle();
+  }
+
+  loading(toggle: boolean): void {
+    this.onLoad = toggle;
+    this.sharedService.disabledFormControl(this.f, toggle);
+  }
+
+  /**
+   * build request
+   * @returns RequestSignIn
+   */
+  requestSignIn(): RequestSignIn {
+    return {
+      identifier: this.SignInFormGroup.controls.identifier.value,
+      password: this.SignInFormGroup.controls.password.value,
+    };
+  }
+
+  get f() {
+    return this.SignInFormGroup;
   }
 }

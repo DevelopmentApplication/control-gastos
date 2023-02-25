@@ -1,11 +1,15 @@
-/** @type {import('tailwindcss').Config} */
-const { violet } = require("tailwindcss/colors");
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  mode: "jit",
   purge: ["./src/**/*.{html,ts}"],
+  content: ["./src/**/*.{html,js}"],
   theme: {
+    extend: {
+      letterSpacing: {
+        forPassword: "0.2em",
+      },
+    },
     screens: {
       sm: "480px",
       md: "768px",

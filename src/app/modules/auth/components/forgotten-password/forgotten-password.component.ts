@@ -9,11 +9,10 @@ import { SharedService } from '@shared/shared.service';
 import { AuthService } from '@services/auth/auth.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css'],
+  templateUrl: './forgotten-password.component.html',
+  styleUrls: ['./forgotten-password.component.css'],
 })
-export class ResetPasswordComponent implements OnInit {
+export class ForgottenPasswordComponent {
   resetFormGroup: FormGroup;
   onLoad: boolean;
 
@@ -39,14 +38,10 @@ export class ResetPasswordComponent implements OnInit {
   sendLink() {
     this.loading(true);
     this.authService
-      .signUp(this.f.controls.email.value)
+      .recoverPassword(this.f.controls.email.value)
       .subscribe({
         next: () => {
-          this.authService.successResponse(
-            '',
-            'User registered successfully.',
-            '/dashboard'
-          );
+          this.authService.successResponse('', 'Email sent successfully.', '');
         },
         error: () => {},
       })

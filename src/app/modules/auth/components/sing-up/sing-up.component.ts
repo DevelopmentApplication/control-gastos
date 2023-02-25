@@ -1,37 +1,27 @@
-import {
-  Component,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
-import { fadeInOut } from '@shared/animation';
+import { fadeInOutAnimation } from '@shared/animation';
 import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/shared.service';
 import { RequestSignUp } from '@models/auth/signUp.interface';
-import { Alert, IAlert } from '@models/alert';
-import { TypeAlert } from '@shared/generic.enum';
-import { AlertComponent } from '@components/alert/alert.component';
+import { TypeLogo } from '@shared/generic.enum';
 
 @Component({
   selector: 'app-sing-up',
   templateUrl: './sing-up.component.html',
   styleUrls: ['./sing-up.component.css'],
-  animations: [fadeInOut()],
+  animations: [fadeInOutAnimation],
 })
 export class SingUpComponent implements OnInit {
   signUpFormGroup: FormGroup;
   onLoad: boolean;
-  @ViewChild('dynamicAuthAlertComponent', { read: ViewContainerRef })
-  viewContainerRef: ViewContainerRef;
+  logo = TypeLogo.ISOTYPE;
 
   constructor(
     private fb: FormBuilder,
@@ -53,61 +43,52 @@ export class SingUpComponent implements OnInit {
       password: new FormControl(null, Validators.required),
       acceptTerms: new FormControl(false, Validators.requiredTrue),
     });
-
-    this.signUpFormGroup.controls.acceptTerms.valueChanges.subscribe((val) => {
-      console.log(this.signUpFormGroup.controls.acceptTerms);
-    });
   }
 
-  close() {}
-
-  disabledFormControl(option: boolean): void {
-    Object.keys(this.signUpFormGroup.controls).forEach((key: string) => {
-      const control = this.signUpFormGroup.controls[key];
-      control.disabled
-        ? control.enable({ emitEvent: false })
-        : control.disable({ emitEvent: false });
-    });
-  }
-
-  auth() {
-    this.onLoading(true);
+  /**
+   * call services to auth
+   */
+  auth(): void {
+    this.loading(true);
     this.authService
       .signUp(this.requestSignUp())
       .subscribe({
-        next: () => this.router.navigate(['/dashboard']),
-        error: (err) => {
-          this.sharedService.generateComponentAlert(
-            this.viewContainerRef,
-            new Alert(
-              TypeAlert.PRIMARY,
-              err.message,
-              true,
-              `${err.status} ${err.name}`
-            )
+        next: () => {
+          this.authService.successResponse(
+            '',
+            'User registered successfully.',
+            '/dashboard'
           );
         },
       })
       .add(() => {
-        this.onLoading(false);
+        this.loading(false);
       });
   }
 
   redirectAuthGoogle() {
-    this.onLoading(true);
+    this.loading(true);
     this.authService.redirectAuthGoogle();
   }
 
-  onLoading(toggle: boolean): void {
+  loading(toggle: boolean): void {
     this.onLoad = toggle;
-    this.disabledFormControl(toggle);
+    this.sharedService.disabledFormControl(this.f, toggle);
   }
 
+  /**
+   * build request
+   * @returns RequestSignUp
+   */
   requestSignUp(): RequestSignUp {
     return {
       username: this.signUpFormGroup.controls.email.value,
       email: this.signUpFormGroup.controls.email.value,
       password: this.signUpFormGroup.controls.password.value,
     };
+  }
+
+  get f() {
+    return this.signUpFormGroup;
   }
 }
