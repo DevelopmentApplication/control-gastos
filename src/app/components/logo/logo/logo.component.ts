@@ -18,6 +18,4 @@ export class LogoComponent {
     this.type = TypeLogo.ISOTYPE;
     this.route = '/home';
   }
-
-  ngOnInit(): void {}
 }
