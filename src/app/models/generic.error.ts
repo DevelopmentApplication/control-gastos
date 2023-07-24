@@ -1,5 +1,3 @@
-import { ErrorType } from '@shared/generic.enum';
-
 export class GenericError {
   status: number;
   name: string;

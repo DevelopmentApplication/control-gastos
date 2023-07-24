@@ -2,21 +2,22 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize, take } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, firstValueFrom, throwError } from 'rxjs';
 import {
-  GenericErrorMessagge,
-  HttpStatusCodeEnum,
-  TypeNotification,
+  EnumHttpStatusCode,
+  EnumTypeComponent,
+  EnumTypeService,
+  EnumTypeNotification,
 } from '@shared/generic.enum';
 import { map } from 'rxjs';
 import { RequestSignUp } from '@models/auth/signUp.interface';
 import { StorageService } from '../storage/storage.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { SharedService } from '../../shared/shared.service';
-import { Notification } from '@models/notification';
 import { RequestSignIn } from '../../models/auth/signIn.interface';
-import { ResponseAuth } from '@models/auth/auth.interface';
-import { Router } from '@angular/router';
+import { ResponseAuth, User } from '@models/auth/auth.interface';
+import { RequestResetPassword } from '@models/auth/reset-password.interface.ts';
+import { ErrorHandlingService } from '../../shared/service/error-handling.service';
+import { UserService } from '@services/user/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +26,9 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
-    private sharedService: SharedService,
     public jwtHelper: JwtHelperService,
-    private router: Router
+    private errorHandlingService: ErrorHandlingService,
+    private userService: UserService
   ) {}
 
   /**
@@ -45,7 +46,7 @@ export class AuthService {
           this.storageService.setCurrentSession(res);
           return res;
         }),
-        catchError((err) => this.handleGetError(err))
+        catchError((err) => this.handleGetError(err, EnumTypeComponent.SIGNUP))
       );
   }
 
@@ -63,19 +64,44 @@ export class AuthService {
           this.storageService.setCurrentSession(res);
           return res;
         }),
-        catchError((err) => this.handleGetError(err.error))
+        catchError((err) => this.handleGetError(err, EnumTypeComponent.SIGNIN))
       );
   }
 
-  recoverPassword(email: string) {
+  /**
+   *
+   * @param email
+   */
+  forggottenPassword(email: string): Observable<boolean> {
     return this.httpClient
-      .post<string>(
+      .post<any>(
         environment.RESTservices.baseUrl + environment.RESTservices.auth.forgot,
         { email }
       )
       .pipe(
+        map((res) => (res.ok ? res.ok : false)),
+        catchError((err) =>
+          this.handleGetError(err, EnumTypeComponent.FORGGOTTENPASS)
+        )
+      );
+  }
+
+  /**
+   * update user password
+   */
+  resetPassword(
+    requestResetPassword: RequestResetPassword
+  ): Observable<string> {
+    return this.httpClient
+      .post<string>(
+        environment.RESTservices.baseUrl + environment.RESTservices.auth.reset,
+        requestResetPassword
+      )
+      .pipe(
         map((res) => res),
-        catchError((err) => this.handleGetError(err))
+        catchError((err) =>
+          this.handleGetError(err, EnumTypeComponent.RESETPASS)
+        )
       );
   }
 
@@ -92,36 +118,38 @@ export class AuthService {
       )
       .pipe(
         map((res) => {
-          debugger;
           this.storageService.setCurrentSession(res);
           return res;
         }),
-        catchError((err) => this.handleGetError(err.error))
+        catchError((err) => this.handleGetError(err))
       );
   }
 
-  public successResponse(
-    messagge: string,
-    title: string,
-    redirecTo: string
-  ): void {
-    this.sharedService.createComponentNotification(
-      new Notification(messagge, title, TypeNotification.SUCCESS, false, true)
-    );
-    this.router.navigate([redirecTo]);
+  /**
+   * Send email to confirm
+   * @param email
+   * @returns
+   */
+  sendEmailConfirmation(email: String): Observable<string> {
+    return this.httpClient
+      .post<string>(
+        environment.RESTservices.baseUrl +
+          environment.RESTservices.auth.emailConfirmation,
+        { email }
+      )
+      .pipe(
+        map((res) => res),
+        catchError((err) =>
+          this.handleGetError(err, EnumTypeComponent.EMAILCONFIRM)
+        )
+      );
   }
 
-  private handleGetError(err: HttpErrorResponse) {
-    console.log(JSON.stringify(err));
-    this.sharedService.createComponentNotification(
-      new Notification(
-        GenericErrorMessagge.MESSAGGE,
-        GenericErrorMessagge.TITLE,
-        TypeNotification.ERROR,
-        true,
-        false
-      )
-    );
+  private handleGetError(
+    err: HttpErrorResponse,
+    component?: EnumTypeComponent
+  ) {
+    this.errorHandlingService.error(err, EnumTypeService.AUTH, component);
     return throwError(() => err);
   }
 
@@ -132,6 +160,6 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return !this.jwtHelper.isTokenExpired(localStorage.getItem('access_token'));
+    return this.userService.isEmailConfirm();
   }
 }

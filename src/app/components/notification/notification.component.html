@@ -2,12 +2,12 @@
   id="notification-1"
   [@fadeOut]
   [@scrollAnimation]="animationState"
-  [class]="data?.type"
+  [class]="data.type"
   role="notification"
   *ngIf="!closed"
 >
-  <div [ngSwitch]="data?.type">
-    <div *ngSwitchCase="typeNotification.DEFAULT">
+  <div [ngSwitch]="data.type">
+    <div *ngSwitchCase="EnumTypeNotification.DEFAULT">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -23,7 +23,7 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeNotification.ERROR">
+    <div *ngSwitchCase="EnumTypeNotification.ERROR">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -38,7 +38,7 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeNotification.WARNING">
+    <div *ngSwitchCase="EnumTypeNotification.WARNING">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -53,7 +53,7 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeNotification.SUCCESS">
+    <div *ngSwitchCase="EnumTypeNotification.SUCCESS">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -68,7 +68,7 @@
         />
       </svg>
     </div>
-    <div *ngSwitchCase="typeNotification.PRIMARY">
+    <div *ngSwitchCase="EnumTypeNotification.PRIMARY">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -85,8 +85,8 @@
     </div>
   </div>
   <div class="w-full">
-    <h6 *ngIf="data?.title">{{ data?.title }}</h6>
-    <p *ngIf="data?.message">{{ data?.message }}</p>
+    <h6 *ngIf="data?.title">{{ data.title }}</h6>
+    <p *ngIf="data?.message">{{ data.message }}</p>
     <div *ngIf="data?.listmessage">
       <ul *ngFor="let messagge of data?.listmessage">
         <li>{{ messagge }}</li>

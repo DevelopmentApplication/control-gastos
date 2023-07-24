@@ -7,8 +7,11 @@
     disabled:opacity-80
     shadow-lg;
   }
+  button.xs {
+    @apply text-xs h-6 py-2 px-3 rounded-md;
+  }
   button.sm {
-    @apply text-xs h-6 py-2 px-4 rounded-md;
+    @apply text-sm h-7 py-2 px-3 rounded-md;
   }
   button.md {
     @apply text-sm h-9 py-2 px-4 rounded-md;
@@ -19,14 +22,14 @@
   button.xl {
     @apply text-lg h-14 py-2 px-4 rounded-lg;
   }
-  button.xxl {
-    @apply text-lg h-20 py-2 px-4 rounded-lg;
-  }
   button.full {
     @apply w-full;
   }
   button.full .b-text {
     @apply w-full;
+  }
+  button.full.xs .b-icon + .b-text {
+    @apply mr-3;
   }
   button.full.sm .b-icon + .b-text {
     margin-right: 0.875 rem;
@@ -46,6 +49,9 @@
   button.auto .b-text {
     @apply w-full;
   }
+  button.auto.xs .b-icon + .b-text {
+    @apply mx-2;
+  }
   button.auto.sm .b-icon + .b-text {
     @apply mx-2;
   }
@@ -61,6 +67,9 @@
   button .b-icon.bi {
     @apply text-violet-500;
   }
+  button.xs .b-icon {
+    @apply text-xs;
+  }
   button.sm .b-icon {
     @apply text-sm;
   }
@@ -72,6 +81,9 @@
   }
   button.xl .b-icon {
     @apply text-3xl;
+  }
+  button.xs svg {
+    @apply w-3 h-3;
   }
   button.sm svg {
     width: 14px;

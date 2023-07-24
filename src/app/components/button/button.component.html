@@ -29,7 +29,7 @@
       <i *ngIf="iconType" class="b-icon" [class]="iconType"></i>
     </ng-template>
 
-    <p *ngIf="text" class="b-text">
+    <div *ngIf="text" class="b-text">
       <ng-container
         *ngIf="onLoad && type.includes('full'); else elseTextTemplate"
       >
@@ -38,6 +38,6 @@
       <ng-template #elseTextTemplate>
         {{ text }}
       </ng-template>
-    </p>
+    </div>
   </button>
 </div>

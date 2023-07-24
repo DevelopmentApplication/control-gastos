@@ -1,4 +1,4 @@
-export enum HttpStatusCodeEnum {
+export enum EnumHttpStatusCode {
   ZERO = 0,
   CONTINUE = 100,
   SWITCHING_PROTOCOLS = 101,
@@ -60,12 +60,7 @@ export enum HttpStatusCodeEnum {
   NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
 
-export enum GenericErrorMessagge {
-  TITLE = 'Sorry, an error has occurred',
-  MESSAGGE = 'Please try again later.',
-}
-
-export enum TypeNotification {
+export enum EnumTypeNotification {
   DEFAULT = 'default',
   WARNING = 'warning',
   ERROR = 'error',
@@ -73,17 +68,36 @@ export enum TypeNotification {
   PRIMARY = 'primary',
 }
 
-export enum TypeButton {
+export enum EnumTypeService {
+  AUTH,
+  USER,
+}
+
+export enum EnumTypeComponent {
+  SIGNIN,
+  SIGNUP,
+  FORGGOTTENPASS,
+  RESETPASS,
+  PROVIDER,
+  EMAILCONFIRM,
+}
+
+export enum EnumTypeButton {
   DEFAULT = 'default',
   PRIMARY = 'primary',
   ACTION = 'action',
 }
 
-export enum ErrorType {
+export enum EnumErrorType {
   ACCOUNT_NOT_FOUND = 'ACCOUNT_NOT_FOUND',
 }
 
-export enum TypeLogo {
+export enum EnumTypeLogo {
   ISOTYPE = 'isotype',
   IMAGOTYPE = 'imagotype',
+}
+
+export enum EnumGeneric {
+  EMPTHY = '',
+  ZERO = 0,
 }

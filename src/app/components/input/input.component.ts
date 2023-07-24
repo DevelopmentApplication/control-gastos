@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fadeInOutAnimation } from '@shared/animation';
+import { PASSWORD_VALIDATION } from '@shared/shared.constants';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -8,6 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css'],
+  animations: [fadeInOutAnimation],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -17,24 +24,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
+  PASSWORD_VALIDATION = PASSWORD_VALIDATION;
+  @Input() control: AbstractControl;
   @Input() id: string;
+  @Input() name: string;
   @Input() type: string;
   @Input() isError: boolean;
   @Input() floatLabel: string;
   @Input() showIconEyes: boolean;
+  @Input() errors?: any;
   value: string;
-  changed: (val: any) => {};
-  touched: () => {};
   disabled: boolean;
+
+  onChange: (val: any) => {};
+  onTouche: () => {};
 
   writeValue(value: string): void {
     this.value = value;
   }
   registerOnChange(fn: any): void {
-    this.changed = fn;
+    this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-    this.touched = fn;
+    this.onTouche = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
@@ -44,11 +56,13 @@ export class InputComponent implements ControlValueAccessor {
     this.type = 'text';
   }
 
-  public onChange(event: Event) {
-    this.changed(
+  public change(event: Event) {
+    this.value = (<HTMLInputElement>event.target).value;
+    this.onChange(
       this.type === 'checkbox'
         ? (<HTMLInputElement>event.target).checked
         : (<HTMLInputElement>event.target).value
     );
+    //this.onTouche();
   }
 }

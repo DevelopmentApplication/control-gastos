@@ -7,20 +7,23 @@ import {
 } from '@angular/forms';
 import { RequestSignIn } from '@models/auth/signIn.interface';
 import { AuthService } from '../../../../services/auth/auth.service';
-import { SharedService } from '../../../../shared/shared.service';
+import { SharedService } from '../../../../shared/service/shared.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment.dev';
-import { TypeLogo } from '@shared/generic.enum';
+import { EnumTypeLogo } from '@shared/generic.enum';
+import { MESSAGE, PASSWORD_VALIDATION, PATH } from '@shared/shared.constants';
+import { fadeIn } from '@shared/animation';
 
 @Component({
   selector: 'app-sing-in',
   templateUrl: './sing-in.component.html',
   styleUrls: ['./sing-in.component.css'],
+  animations: [fadeIn],
 })
 export class SingInComponent {
   SignInFormGroup: FormGroup;
   onLoad: boolean;
-  logo = TypeLogo.IMAGOTYPE;
+  logo = EnumTypeLogo.IMAGOTYPE;
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +42,14 @@ export class SingInComponent {
         updateOn: 'blur',
         validators: [Validators.required, Validators.email],
       }),
-      password: new FormControl(null, Validators.required),
+      password: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [
+          Validators.required,
+          Validators.minLength(PASSWORD_VALIDATION.MIN_LENGTH),
+          Validators.maxLength(PASSWORD_VALIDATION.MAX_LENGTH),
+        ],
+      }),
     });
   }
 
@@ -47,31 +57,28 @@ export class SingInComponent {
    * call services to auth
    */
   auth(): void {
-    this.loading(true);
+    this.onLoad = true;
+    this.sharedService.loading(true, this.f);
     this.authService
       .signIn(this.requestSignIn())
       .subscribe({
         next: () => {
-          this.authService.successResponse(
+          this.sharedService.successResponse(
             '',
-            'User registered successfully.',
-            '/dashboard'
+            MESSAGE.NOTIFICATION.AUTH.SIGNIN.AUTHENTICATED_SUCCESS.MESSAGE,
+            `/${PATH.PROFILE}`
           );
         },
       })
       .add(() => {
-        this.loading(false);
+        this.onLoad = false;
+        this.sharedService.loading(false, this.f);
       });
   }
 
   redirectAuthGoogle() {
-    this.loading(true);
+    this.sharedService.loading(true, this.f);
     this.authService.redirectAuthGoogle();
-  }
-
-  loading(toggle: boolean): void {
-    this.onLoad = toggle;
-    this.sharedService.disabledFormControl(this.f, toggle);
   }
 
   /**

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@components/input/input.component';
 import { NotificationComponent } from '@components/notification/notification.component';
 import { ButtonComponent } from '@components/button/button.component';
-import { SocialButtonComponent } from '../components/social-button/social-button.component';
+import { SocialButtonComponent } from '@components/social-button/social-button.component';
 import { LogoComponent } from '@components/logo/logo/logo.component';
+import { HeaderComponent } from '@components/header/header.component';
+import { LoadingComponent } from '@components/loading/loading.component';
+import { CountdownComponent } from '@components/countdown/countdown.component';
 
 @NgModule({
   declarations: [],
@@ -16,6 +16,9 @@ import { LogoComponent } from '@components/logo/logo/logo.component';
     LogoComponent,
     InputComponent,
     ButtonComponent,
+    HeaderComponent,
+    LoadingComponent,
+    CountdownComponent,
   ],
   exports: [
     NotificationComponent,
@@ -23,6 +26,9 @@ import { LogoComponent } from '@components/logo/logo/logo.component';
     LogoComponent,
     InputComponent,
     ButtonComponent,
+    HeaderComponent,
+    LoadingComponent,
+    CountdownComponent,
   ],
 })
 export class SharedModule {}

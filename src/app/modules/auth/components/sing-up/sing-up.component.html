@@ -1,79 +1,93 @@
 <div
+  [@fadeIn]
   class="min-h-full flex justify-end bg-gradient-to-br from-violet-400 to-violet-700"
 >
   <div
     class="lg:max-w-2xl w-full h-auto flex flex-col justify-center bg-white shadow text-sm sm:px-20 md:px-40 lg:px-20 pt-8 pb-6 space-y-6"
   >
     <app-logo></app-logo>
-    <div>
-      <h1 class="text-center">Create your Account</h1>
-      <p class="text-center">
-        Already registered?
-        <a [routerLink]="['../signIn']">Sign In</a>
-      </p>
-    </div>
-    <form [formGroup]="f" class="mt-6 space-y-5">
-      <app-social-button
-        [type]="'md auto b-google-secondary'"
-        [text]="'Sign Up with Google'"
-        [social]="'google'"
-        (callback)="redirectAuthGoogle()"
-      ></app-social-button>
-      <p class="text-center">or continues with credentials</p>
+    <div *ngIf="!showEmailConfirm">
       <div>
-        <app-input
-          [id]="'email'"
-          [type]="'email'"
-          [floatLabel]="'Enter your email'"
-          [isError]="!f.controls.email.pristine && f.controls.email.invalid"
-          formControlName="email"
-        ></app-input>
-        <p
-          *ngIf="f.controls.email.errors?.['email']"
-          [@fadeInOutAnimation]
-          class="error my-1 text-xs"
-        >
-          Invalid email
+        <h1 class="text-center">Create your Account</h1>
+        <p class="text-center">
+          Already registered?
+          <a [routerLink]="['../signIn']">Sign In</a>
         </p>
       </div>
+      <form [formGroup]="f" class="mt-6 space-y-5">
+        <app-social-button
+          [type]="'md auto b-google-secondary'"
+          [text]="'Sign Up with Google'"
+          [social]="'google'"
+          (callback)="redirectAuthGoogle()"
+        ></app-social-button>
+        <p class="text-center">or continues with credentials</p>
+        <div>
+          <app-input
+            [control]="f.controls.email"
+            [id]="'email'"
+            [name]="'email'"
+            [type]="'email'"
+            [floatLabel]="'Enter your email'"
+            [isError]="!f.controls.email.pristine && f.controls.email.invalid"
+            formControlName="email"
+          ></app-input>
+        </div>
+        <div>
+          <app-input
+            [control]="f.controls.password"
+            [id]="'password'"
+            [name]="'password'"
+            [type]="'password'"
+            [floatLabel]="'Enter your password'"
+            [isError]="
+              !f.controls.password.pristine && f.controls.password.invalid
+            "
+            formControlName="password"
+            [showIconEyes]="true"
+          >
+          </app-input>
+        </div>
+        <div class="flex items-center space-x-4">
+          <app-input
+            [control]="f.controls.acceptTerms"
+            [id]="'acceptTerms'"
+            [name]="'terms'"
+            [type]="'checkbox'"
+            formControlName="acceptTerms"
+          ></app-input>
+          <label for="acceptTerms" class="text-center text-sm">
+            Agreed with our
+            <a [routerLink]="['../../terms']">Terms of Services</a>
+            and
+            <a [routerLink]="['../../privacy']">Privacy Policy.</a>
+          </label>
+        </div>
+        <div>
+          <app-button
+            [size]="'md'"
+            [width]="'full'"
+            [type]="'action'"
+            [text]="'Create account'"
+            [iconType]="'bi bi-box-arrow-in-right'"
+            [disabled]="f.invalid || onLoad"
+            (callback)="auth()"
+          ></app-button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="showEmailConfirm" [@fadeIn]>
       <div>
-        <app-input
-          [id]="'password'"
-          [type]="'password'"
-          [floatLabel]="'Enter your password'"
-          [isError]="
-            !f.controls.password.pristine && f.controls.password.invalid
-          "
-          formControlName="password"
-          [showIconEyes]="true"
-        >
-        </app-input>
+        <h5 class="mb-2 text-center">
+          {{ VALIDATION_EMAIL.MESSAGE }}
+        </h5>
       </div>
-      <div class="flex items-center space-x-4">
-        <app-input
-          [id]="'acceptTerms'"
-          [type]="'checkbox'"
-          formControlName="acceptTerms"
-        ></app-input>
-        <label for="acceptTerms" class="text-center text-sm">
-          Agreed with our
-          <a [routerLink]="['../../terms']">Terms of Services</a>
-          and
-          <a [routerLink]="['../../privacy']">Privacy Policy.</a>
-        </label>
-      </div>
-      <div>
-        <app-button
-          [size]="'md'"
-          [width]="'full'"
-          [type]="'action'"
-          [text]="'Create account'"
-          [iconType]="'bi bi-box-arrow-in-right'"
-          [onLoad]="onLoad"
-          [disabled]="f.invalid || onLoad"
-          (callback)="auth()"
-        ></app-button>
-      </div>
-    </form>
+      <app-countdown
+        [text]="'Have you not received the link? check your spam folder or'"
+        [onLoad]="onLoad"
+        (callback)="sendEmailConfirmation()"
+      ></app-countdown>
+    </div>
+    <app-loading [text]="'Please, wait...'"></app-loading>
   </div>
 </div>

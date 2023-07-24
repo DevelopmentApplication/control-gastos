@@ -19,11 +19,12 @@ const routes: Routes = [
     component: SingUpComponent,
   },
   {
-    path: 'reset/password',
+    path: 'reset',
+    pathMatch: 'full',
     component: ResetPasswordComponent,
   },
   {
-    path: 'forgotten/password',
+    path: 'forgotten',
     component: ForgottenPasswordComponent,
   },
   {

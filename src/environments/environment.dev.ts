@@ -13,6 +13,7 @@ export const environment = {
       authGoogle: '/api/connect/google',
       forgot: '/api/auth/forgot-password',
       reset: '/api/auth/reset-password',
+      emailConfirmation: 'api/auth/send-email-confirmation',
     },
     historialVersion: {
       getHistorialVersiones: '/api/version-histories',

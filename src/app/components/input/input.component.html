@@ -4,8 +4,8 @@
     [type]="type"
     [ngClass]="{ error: isError, 'pr-12': showIconEyes }"
     [value]="value"
-    (input)="onChange($event)"
-    (blur)="touched()"
+    (input)="change($event)"
+    (blur)="onTouche()"
     [disabled]="disabled"
     class="peer"
     placeholder=" "
@@ -28,4 +28,26 @@
   >
     {{ floatLabel }}
   </label>
+</div>
+<div *ngIf="isError" [@fadeInOutAnimation]>
+  <p *ngIf="control?.errors?.['email']" class="error my-1 text-xs">
+    {{ name }} is invalid
+  </p>
+  <p *ngIf="control?.errors?.['required']" class="error my-1 text-xs">
+    {{ name }} is required
+  </p>
+  <p
+    *ngIf="control?.errors?.['minlength']"
+    class="error my-1 text-xs"
+    [@fadeInOutAnimation]
+  >
+    {{ name }} must be at least {{ PASSWORD_VALIDATION.MIN_LENGTH }} character
+  </p>
+  <p
+    *ngIf="control?.errors?.['maxlength']"
+    class="error my-1 text-xs"
+    [@fadeInOutAnimation]
+  >
+    {{ name }} must be at least {{ PASSWORD_VALIDATION.MAX_LENGTH }} character
+  </p>
 </div>

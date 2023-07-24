@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './providers/auth.guard';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { PrivacyComponent } from '@pages/privacy/privacy.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { PATH } from '@shared/shared.constants';
 
 const routes: Routes = [
   {
@@ -13,12 +13,12 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: PATH.HOME,
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'dashboard',
+    path: PATH.DASHBOARD,
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then(
@@ -26,9 +26,15 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'auth',
+    path: PATH.AUTH,
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: PATH.PROFILE,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: 'connect/google/redirect',
@@ -38,11 +44,11 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'terms',
+    path: PATH.TERMS,
     component: TermsComponent,
   },
   {
-    path: 'privacy',
+    path: PATH.PRIVACY,
     component: PrivacyComponent,
   },
   {

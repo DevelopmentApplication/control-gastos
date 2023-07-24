@@ -5,16 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './modules/core/core.module';
-import { ButtonComponent } from '@components/button/button.component';
+import { ProjectComponent } from './modules/project/project.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ProjectComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
-    ButtonComponent,
   ],
   bootstrap: [AppComponent],
 })

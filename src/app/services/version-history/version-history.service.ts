@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize, take } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpStatusCodeEnum } from '@shared/generic.enum';
+import { EnumHttpStatusCode } from '@shared/generic.enum';
 import { map } from 'rxjs';
 import { ResponseVersionHistory } from '@models/version-history/version-history.interface';
 import { GenericError } from '@models/generic.error';

@@ -1,14 +1,14 @@
 import { ComponentRef } from '@angular/core';
-import { TypeNotification } from '../shared/generic.enum';
+import { EnumTypeNotification } from '../shared/generic.enum';
 
 export class Notification {
-  type: string;
   message: string;
   title: string;
-  listmessage: string[];
+  type: string;
   closeable: boolean;
   autoclose: boolean;
-
+  timeoutAutoclose: number;
+  listmessage: string[];
   /**
    * @constructor
    */
@@ -66,6 +66,24 @@ export class Notification {
    * @param [type] Notification Type @example 'default', 'success' or 'error'
    * @param [closeable] Indicates the component is closable @default is false
    * @param [autoclose] indicates if the component closes itself @default is true
+   * @param [timeoutAutoclose] indicate time in miliseconds to disapear notification @default 2500
+   */
+  constructor(
+    message?: string,
+    title?: string,
+    type?: string,
+    closeable?: boolean,
+    autoclose?: boolean,
+    timeoutAutoclose?: number
+  );
+  /**
+   *
+   * @param [message] Message to display
+   * @param [title] Title of notification
+   * @param [type] Notification Type @example 'default', 'success' or 'error'
+   * @param [closeable] Indicates the component is closable @default is false
+   * @param [autoclose] indicates if the component closes itself @default is true
+   * @param [timeoutAutoclose] indicate time in miliseconds to disapear notification @default 2500
    * @param [listmessage] List of messages to enumerate
    */
   constructor(
@@ -74,26 +92,25 @@ export class Notification {
     type?: string,
     closeable?: boolean,
     autoclose?: boolean,
+    timeoutAutoclose?: number,
+    listmessage?: string[]
+  );
+  constructor(
+    message?: string,
+    title?: string,
+    type?: string,
+    closeable?: boolean,
+    autoclose?: boolean,
+    timeoutAutoclose?: number,
     listmessage?: string[]
   ) {
-    if (type) {
-      this.type = type || TypeNotification.DEFAULT;
-    }
-    if (title) {
-      this.title = title || '';
-    }
-    if (message) {
-      this.message = message || '';
-    }
-    if (closeable) {
-      this.closeable = closeable || false;
-    }
-    if (autoclose) {
-      this.autoclose = autoclose || true;
-    }
-    if (listmessage) {
-      this.listmessage = listmessage || [];
-    }
+    this.type = type ? type : EnumTypeNotification.DEFAULT;
+    this.title = title ? title : '';
+    this.message = message ? message : '';
+    this.closeable = closeable ? closeable : false;
+    this.autoclose = autoclose ? autoclose : true;
+    this.timeoutAutoclose = timeoutAutoclose ? timeoutAutoclose : 2500;
+    this.listmessage = listmessage ? listmessage : [];
   }
 }
 

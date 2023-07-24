@@ -1,6 +1,5 @@
 import { Component, ComponentRef } from '@angular/core';
-import { TypeNotification } from '@shared/generic.enum';
-import { SharedService } from '@shared/shared.service';
+import { EnumTypeNotification } from '@shared/generic.enum';
 import { Notification, INotification } from '@models/notification';
 import {
   fadeInOutAnimation,
@@ -8,6 +7,7 @@ import {
   scrollAnimation,
 } from '@shared/animation';
 import { CommonModule } from '@angular/common';
+import { NotificationService } from '@services/notification/notification.service';
 
 @Component({
   standalone: true,
@@ -18,12 +18,12 @@ import { CommonModule } from '@angular/common';
   animations: [fadeInOutAnimation, fadeOut, scrollAnimation],
 })
 export class NotificationComponent implements INotification {
-  data: Notification | undefined;
+  data: Notification;
   componentRef: ComponentRef<INotification>;
   closed: boolean;
   animationState = 'start';
 
-  constructor(private SharedService: SharedService) {}
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -36,17 +36,17 @@ export class NotificationComponent implements INotification {
       if (this.data?.autoclose) {
         this.close();
       }
-    }, 2500);
+    }, this.data.timeoutAutoclose);
   }
 
-  get typeNotification(): typeof TypeNotification {
-    return TypeNotification;
+  get EnumTypeNotification(): typeof EnumTypeNotification {
+    return EnumTypeNotification;
   }
 
   close() {
     this.closed = true;
     setTimeout(() => {
-      this.SharedService.destroyComponentNotification(this.componentRef);
+      this.notificationService.destroyComponentNotification(this.componentRef);
     }, 5000);
   }
 }
